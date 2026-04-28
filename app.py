@@ -17,6 +17,115 @@ try:
 except ImportError:
     _PDF_AVAILABLE = False
 
+try:
+    from fpdf import FPDF
+    _FPDF_AVAILABLE = True
+except ImportError:
+    _FPDF_AVAILABLE = False
+
+
+# --------------------------------------------------------------------------- #
+# Phase 11: LLM integration via OpenRouter (OpenAI-compatible API)
+# --------------------------------------------------------------------------- #
+
+def _load_dotenv(path=".env"):
+    """Lightweight .env loader (no external dep). Reads KEY=VALUE per line."""
+    if not os.path.exists(path):
+        return
+    with open(path, "r", encoding="utf-8") as f:
+        for raw in f:
+            line = raw.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, value = line.partition("=")
+            key = key.strip()
+            value = value.strip().strip('"').strip("'")
+            if key and key not in os.environ:
+                os.environ[key] = value
+
+
+_load_dotenv()
+
+
+def _get_secret(key, default=""):
+    """
+    Read a secret from (in order): Streamlit Cloud secrets -> env var (incl. .env) -> default.
+    This lets the same code work locally (with .env) and on Streamlit Cloud
+    (with the dashboard's Secrets pane).
+    """
+    # 1. Streamlit secrets (only available when running under streamlit)
+    try:
+        import streamlit as _st  # noqa: WPS433
+        if hasattr(_st, "secrets") and key in _st.secrets:
+            return str(_st.secrets[key]).strip()
+    except Exception:
+        pass
+    # 2. Environment / .env
+    return os.environ.get(key, default).strip()
+
+
+OPENROUTER_API_KEY = _get_secret("OPENROUTER_API_KEY", "")
+OPENROUTER_MODEL = _get_secret("OPENROUTER_MODEL", "anthropic/claude-haiku-4.5")
+OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+
+try:
+    from openai import OpenAI
+    _OPENAI_SDK_AVAILABLE = True
+except ImportError:
+    _OPENAI_SDK_AVAILABLE = False
+
+def _current_api_key():
+    return _get_secret("OPENROUTER_API_KEY", "") or OPENROUTER_API_KEY
+
+
+def _current_model():
+    return _get_secret("OPENROUTER_MODEL", "") or OPENROUTER_MODEL
+
+
+def llm_available():
+    """True if we have both an API key (env / .env / st.secrets) and the openai SDK."""
+    return bool(_current_api_key()) and _OPENAI_SDK_AVAILABLE
+
+
+def _build_llm_client():
+    if not llm_available():
+        return None
+    return OpenAI(
+        base_url=OPENROUTER_BASE_URL,
+        api_key=_current_api_key(),
+        default_headers={
+            "HTTP-Referer": "https://github.com/Ateeb-333/job-hunting-agent",
+            "X-Title": "CareerPrep Job-Hunting Agent",
+        },
+    )
+
+
+def call_llm(prompt, system="You are a helpful assistant.",
+             model=None, max_tokens=800, temperature=0.4):
+    """
+    Single-shot LLM call via OpenRouter. Returns text on success or None on
+    any failure (missing key, network error, API error). The caller must
+    fall back to the template path on None.
+    """
+    client = _build_llm_client()
+    if client is None:
+        return None
+    try:
+        resp = client.chat.completions.create(
+            model=model or _current_model(),
+            messages=[
+                {"role": "system", "content": system},
+                {"role": "user", "content": prompt},
+            ],
+            max_tokens=max_tokens,
+            temperature=temperature,
+        )
+        if resp.choices and resp.choices[0].message:
+            return (resp.choices[0].message.content or "").strip()
+    except Exception as e:
+        print(f"  ! LLM call failed ({type(e).__name__}): {e}")
+    return None
+
 JOB_DIR = "input_jobs"
 RESUME_DIR = "input_resumes"
 KB_DIR = "input_kb"
@@ -27,13 +136,44 @@ SAMPLES_DIR = "samples"
 ALL_FOLDERS = [JOB_DIR, RESUME_DIR, KB_DIR, OUTPUT_DIR, TRACKER_DIR, SAMPLES_DIR]
 
 # Skills/keywords the agent recognizes. Multi-word entries are matched as phrases.
+# Expanded for Phase 8 to cover modern AI/ML, data, web, devops, and soft-skill terms.
 KEYWORDS = [
-    "python", "machine learning", "data preprocessing", "github", "git",
-    "api", "prompt engineering", "sql", "communication", "problem solving",
-    "oop", "database", "jupyter", "pandas", "numpy", "deep learning",
-    "html", "css", "flask", "streamlit", "tensorflow", "pytorch",
-    "scikit-learn", "rest", "etl", "linux", "docker", "aws",
-    "javascript", "react", "node", "java", "c++", "version control",
+    # Languages
+    "python", "java", "c++", "c#", "javascript", "typescript", "go", "rust",
+    "kotlin", "swift", "ruby", "php", "scala", "r", "bash", "shell scripting",
+    # Web
+    "html", "css", "react", "next.js", "vue", "angular", "node", "express",
+    "flask", "django", "fastapi", "streamlit", "tailwind",
+    # Data / ML / AI
+    "machine learning", "deep learning", "data preprocessing", "data analysis",
+    "data visualization", "pandas", "numpy", "scikit-learn", "tensorflow",
+    "pytorch", "jupyter", "matplotlib", "seaborn", "huggingface",
+    "transformers", "nlp", "computer vision", "reinforcement learning",
+    "feature engineering", "model deployment", "mlops",
+    # LLM / GenAI
+    "prompt engineering", "rag", "vector database", "embeddings", "fine-tuning",
+    "llm", "openai", "anthropic", "langchain", "llama",
+    # Databases / storage
+    "sql", "nosql", "postgresql", "mysql", "mongodb", "redis", "sqlite",
+    "elasticsearch", "snowflake", "bigquery", "database", "data warehouse",
+    # APIs / backend
+    "api", "rest", "graphql", "grpc", "microservices", "websocket", "etl",
+    # DevOps / cloud
+    "docker", "kubernetes", "aws", "gcp", "azure", "terraform", "ansible",
+    "ci/cd", "github actions", "jenkins", "linux", "nginx",
+    # Tools / version control
+    "git", "github", "gitlab", "bitbucket", "version control", "jira",
+    "agile", "scrum", "vs code", "intellij",
+    # Testing / quality
+    "unit testing", "pytest", "jest", "selenium", "tdd",
+    # Foundations
+    "oop", "data structures", "algorithms", "design patterns", "system design",
+    "object-oriented programming",
+    # Soft skills
+    "communication", "problem solving", "teamwork", "leadership",
+    "critical thinking", "time management", "collaboration", "presentation",
+    # Misc
+    "excel", "powerpoint", "tableau", "power bi", "figma",
 ]
 
 
@@ -46,21 +186,54 @@ def ensure_folders():
         os.makedirs(folder, exist_ok=True)
 
 
+_MAX_FILE_BYTES = 5 * 1024 * 1024     # 5 MB hard cap per input file
+_SCANNED_PDF_THRESHOLD = 50            # avg chars per page below which we suspect a scan
+
+
 def _read_pdf(path):
-    """Extract text from a PDF. Returns "" and warns if pypdf is missing."""
+    """Extract text from a PDF. Detects scanned/image-only PDFs and warns the user."""
     if not _PDF_AVAILABLE:
         print(f"  ! Skipping {os.path.basename(path)} (install pypdf to enable PDF reading)")
         return ""
     try:
         reader = PdfReader(path)
-        return "\n".join((page.extract_text() or "") for page in reader.pages)
+        pages = [(page.extract_text() or "") for page in reader.pages]
+        text = "\n".join(pages)
+        if pages:
+            avg = sum(len(p) for p in pages) / len(pages)
+            if avg < _SCANNED_PDF_THRESHOLD:
+                print(
+                    f"  ! {os.path.basename(path)} produced only {int(avg)} chars/page — "
+                    f"likely a scanned/image PDF. Try copy-pasting the text into a .txt file "
+                    f"or running OCR first."
+                )
+        return text
     except Exception as e:
         print(f"  ! Failed to read {os.path.basename(path)}: {e}")
         return ""
 
 
+def _read_text_with_fallback(path):
+    """Read a .txt file with utf-8, falling back to latin-1 if needed."""
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return f.read()
+    except UnicodeDecodeError:
+        print(f"  ! {os.path.basename(path)} is not UTF-8, retrying as latin-1.")
+        with open(path, "r", encoding="latin-1") as f:
+            return f.read()
+
+
 def read_text_files(folder):
-    """Read every .txt and .pdf file in `folder`, return (combined_text, file_count, file_list)."""
+    """
+    Read every .txt and .pdf file in `folder`. Returns (combined_text, file_count, file_list).
+
+    Robustness:
+      - utf-8 -> latin-1 fallback for stubborn .txt files.
+      - Warns on .docx / .doc (unsupported, suggests conversion).
+      - Warns on files larger than _MAX_FILE_BYTES.
+      - Detects scanned/empty PDFs and tells the user how to recover.
+    """
     combined_text = ""
     files_read = []
     if not os.path.isdir(folder):
@@ -69,19 +242,80 @@ def read_text_files(folder):
     for filename in sorted(os.listdir(folder)):
         lower = filename.lower()
         path = os.path.join(folder, filename)
+        if filename.startswith("."):
+            continue  # skip hidden files like .DS_Store
+
+        try:
+            size = os.path.getsize(path)
+        except OSError:
+            size = 0
+        if size > _MAX_FILE_BYTES:
+            mb = size / 1024 / 1024
+            print(f"  ! {filename} is {mb:.1f} MB — skipping (max 5 MB). "
+                  f"Trim the file and try again.")
+            continue
+
         if lower.endswith(".txt"):
-            with open(path, "r", encoding="utf-8") as f:
-                content = f.read()
+            content = _read_text_with_fallback(path)
         elif lower.endswith(".pdf"):
             content = _read_pdf(path)
-            if not content:
+            if not content.strip():
                 continue
-        else:
+        elif lower.endswith((".docx", ".doc")):
+            print(f"  ! {filename} is a Word file — not supported. "
+                  f"Save it as PDF or copy the text into a .txt file.")
             continue
+        elif os.path.isdir(path):
+            continue
+        else:
+            print(f"  ! {filename} has an unsupported extension — skipping.")
+            continue
+
         combined_text += f"\n\n--- FILE: {filename} ---\n{content}"
         files_read.append(filename)
 
     return combined_text, len(files_read), files_read
+
+
+def surface_extra_jd_terms(job_text, known_skills, top_n=10):
+    """
+    Surface frequent capitalized phrases (1-3 words) in the JD that are NOT
+    already in our keyword list. Lightweight bigram/trigram detection so a
+    layman uploading a JD with role-specific terms (e.g. 'Vector Database',
+    'Snowflake', 'RAG Pipeline') gets *some* signal even if they're not in
+    our static list.
+    """
+    if not job_text:
+        return []
+    # Find capitalized 1-3 word sequences (proper nouns, technical terms).
+    pattern = r"\b([A-Z][A-Za-z0-9+#.\-]{1,}(?:\s+[A-Z][A-Za-z0-9+#.\-]{1,}){0,2})\b"
+    matches = re.findall(pattern, job_text)
+    counts = {}
+    known_lower = {s.lower() for s in known_skills}
+    stop_phrases = {
+        "Job", "Title", "Company", "Location", "Type", "About", "Role",
+        "Responsibilities", "Required", "Skills", "Nice", "Have", "Education",
+        "How", "Apply", "We", "You", "The", "This", "Our", "Your",
+        "Send", "Strong", "Familiarity", "Working", "Knowledge", "Comfortable",
+        "Good", "Internship", "Months", "Remote", "Lahore", "Karachi", "Islamabad",
+        "BS", "Computer", "Science", "Software", "Engineering", "Field", "Year",
+    }
+    for raw in matches:
+        phrase = raw.strip()
+        if phrase.lower() in known_lower:
+            continue
+        # drop single-word stop phrases / very short tokens
+        if phrase in stop_phrases:
+            continue
+        if len(phrase) < 3:
+            continue
+        counts[phrase] = counts.get(phrase, 0) + 1
+    # keep terms that appear at least twice (more likely to be meaningful)
+    ranked = sorted(
+        ((p, c) for p, c in counts.items() if c >= 2),
+        key=lambda x: (-x[1], x[0]),
+    )
+    return [p for p, _ in ranked[:top_n]]
 
 
 def save_text(path, content):
@@ -128,7 +362,7 @@ def compare_skills(job_skills, resume_skills):
 # Phase 2: report generation
 # --------------------------------------------------------------------------- #
 
-def generate_job_analysis(job_files, job_skills):
+def generate_job_analysis(job_files, job_skills, extra_terms=None):
     lines = [
         "Job Analysis Report",
         "===================",
@@ -146,7 +380,17 @@ def generate_job_analysis(job_files, job_skills):
         for skill in sorted(job_skills):
             lines.append(f"  - {skill}")
     else:
-        lines.append("  (none detected — consider expanding the KEYWORDS list)")
+        lines.append("  (none detected — the JD may use uncommon terminology)")
+
+    if extra_terms:
+        lines += [
+            "",
+            "Other notable terms in the JD (not in the agent's known skill list):",
+        ]
+        for term in extra_terms:
+            lines.append(f"  ? {term}")
+        lines.append("  (consider whether any of these are skills you should highlight)")
+
     return "\n".join(lines) + "\n"
 
 
@@ -229,11 +473,70 @@ SKILL_BULLET_TEMPLATES = {
 }
 
 
-def generate_resume_suggestions(matched, missing):
+def _llm_resume_rewrites(resume_text, job_text, matched, missing):
+    """Ask the LLM to rewrite the candidate's actual bullets in JD vocabulary."""
+    if not llm_available():
+        return None
+    system = (
+        "You are an expert resume writer. You rewrite a candidate's existing "
+        "resume bullets so they mirror the language of a target job posting, "
+        "without inventing experience. You preserve facts but tighten phrasing, "
+        "add JD vocabulary where it fits, and quantify when the original bullet "
+        "implies a number. You never fabricate metrics."
+    )
+    prompt = f"""Below is a candidate's resume and a target job posting.
+
+Pull out 5-8 bullet points from the resume that could be rewritten to better
+match the JD. For each one, output:
+
+  ORIGINAL:  <the bullet exactly as it appears in the resume>
+  REWRITE:   <improved version that mirrors JD vocabulary>
+  WHY:       <one short sentence explaining the change>
+
+Then list 3-5 BULLETS TO ADD: skills the JD wants but the resume doesn't show.
+For each, propose a short bullet that the candidate could earn quickly through
+a small project.
+
+Rules:
+- Never invent experience the candidate doesn't already have.
+- Keep ORIGINAL exactly as written. Don't paraphrase.
+- REWRITE must be the same factual content with stronger wording.
+- Output plain text, no markdown headers.
+
+JOB POSTING (excerpt):
+\"\"\"
+{job_text[:2500]}
+\"\"\"
+
+RESUME:
+\"\"\"
+{resume_text[:3000]}
+\"\"\"
+
+JD skills the candidate already has: {', '.join(matched) if matched else 'none'}
+JD skills the candidate is missing: {', '.join(missing) if missing else 'none'}
+"""
+    return call_llm(prompt, system=system, max_tokens=1100, temperature=0.4)
+
+
+def generate_resume_suggestions(matched, missing, resume_text="", job_text=""):
+    """LLM-first resume rewrites with template fallback."""
+    llm_text = _llm_resume_rewrites(resume_text, job_text, matched, missing) if resume_text else None
+
+    if llm_text:
+        return (
+            "Tailored Resume Suggestions\n"
+            "===========================\n"
+            f"Generated: {datetime.now():%Y-%m-%d %H:%M:%S}\n"
+            "Mode: LLM-tailored (rewrites your actual bullets in JD vocabulary)\n\n"
+            f"{llm_text}\n"
+        )
+
     lines = [
         "Tailored Resume Suggestions",
         "===========================",
         f"Generated: {datetime.now():%Y-%m-%d %H:%M:%S}",
+        "Mode: template (set OPENROUTER_API_KEY for personalized rewrites)",
         "",
         "1) Strengthen these bullets — you already have evidence, make sure it's visible:",
     ]
@@ -293,40 +596,122 @@ def _extract_kb_topics(kb_text):
     return topics
 
 
-def generate_interview_questions(job_skills, kb_text):
+def _llm_technical_questions(job_text, resume_text, job_skills, missing):
+    """Use the LLM to pick 8 high-signal technical questions tailored to JD + resume."""
+    if not llm_available():
+        return None
+    system = (
+        "You are a senior engineering interviewer. You pick interview questions "
+        "that test depth, not breadth. You pick questions that are likely to "
+        "actually be asked for the given role and that probe both strengths and "
+        "weak spots in the candidate's resume."
+    )
+    prompt = f"""Pick exactly 8 interview questions for this candidate applying to this role.
+
+Rules:
+- Mix: 5 should target skills the candidate has (test depth), 3 should target gaps (test honesty + learning ability).
+- Each question must be specific (not "what is Python?") and reference real engineering practice.
+- For 2 of the 8, include a one-line "What I'd watch for in the answer:" note for the candidate.
+- Output as a numbered list. No preamble, no closing.
+
+JOB POSTING (excerpt):
+\"\"\"
+{job_text[:2000]}
+\"\"\"
+
+RESUME (excerpt):
+\"\"\"
+{resume_text[:2000]}
+\"\"\"
+
+Skills the candidate already has from the JD: {', '.join(job_skills[:20])}
+Skills the candidate is missing: {', '.join(missing[:10])}
+"""
+    return call_llm(prompt, system=system, max_tokens=900, temperature=0.4)
+
+
+def _llm_hr_questions(job_text, resume_text):
+    """LLM-picked behavioural questions tailored to the role."""
+    if not llm_available():
+        return None
+    system = "You write tight, role-aware behavioural interview questions."
+    prompt = f"""Pick 5 behavioural questions tailored to this specific role and candidate.
+
+Rules:
+- Avoid generic openers ("Tell me about yourself"). Pick questions a real interviewer for THIS role would ask.
+- Output as a numbered list. No preamble, no closing.
+- Each question should be answerable in 2-3 minutes using STAR.
+
+JOB POSTING (excerpt):
+\"\"\"
+{job_text[:1500]}
+\"\"\"
+
+RESUME (excerpt):
+\"\"\"
+{resume_text[:1500]}
+\"\"\"
+"""
+    return call_llm(prompt, system=system, max_tokens=400, temperature=0.5)
+
+
+def generate_interview_questions(job_skills, kb_text, job_text="", resume_text="", missing=None):
+    """
+    Tailored interview questions. If LLM is available, picks 8 technical + 5 HR
+    questions specific to the candidate. Falls back to the per-skill template
+    list when the LLM is not configured.
+    """
+    missing = missing or []
+
     lines = [
         "Interview Questions",
         "===================",
         f"Generated: {datetime.now():%Y-%m-%d %H:%M:%S}",
+        f"Mode: {'LLM-tailored' if llm_available() else 'template (set OPENROUTER_API_KEY for tailored questions)'}",
         "",
-        "A. Technical questions (derived from the job posters):",
-    ]
-    if job_skills:
-        for s in sorted(job_skills):
-            lines.append(f"  - Walk me through a project where you used {s}. What trade-offs did you make?")
-            lines.append(f"  - What's a common pitfall with {s} that you've personally hit?")
-    else:
-        lines.append("  (no JD skills detected)")
-
-    lines += [
-        "",
-        "B. HR / behavioral questions (standard set):",
-        "  - Tell me about yourself.",
-        "  - Why this role / why this company?",
-        "  - Walk me through your strongest project end-to-end.",
-        "  - Tell me about a time you disagreed with a teammate. What did you do?",
-        "  - Tell me about a time you failed and what you learned.",
-        "  - What's a weakness you're actively working on?",
-        "  - Where do you want to be in 2-3 years?",
-        "  - Why should we pick you over other candidates?",
-        "",
-        "C. Questions inspired by your KB / course material:",
     ]
 
-    topics = _extract_kb_topics(kb_text)
-    if not topics:
-        lines.append("  (no topics extracted from input_kb/ — add some notes there)")
+    llm_tech = _llm_technical_questions(job_text, resume_text, job_skills, missing) if job_text else None
+    llm_hr = _llm_hr_questions(job_text, resume_text) if job_text else None
+
+    if llm_tech:
+        lines.append("A. Technical questions (LLM-picked, tailored to your resume + the JD):")
+        lines.append("")
+        lines.append(llm_tech)
+        lines.append("")
     else:
+        lines.append("A. Technical questions (derived from the job posters):")
+        if job_skills:
+            for s in sorted(job_skills)[:15]:    # cap template version too
+                lines.append(f"  - Walk me through a project where you used {s}. What trade-offs did you make?")
+                lines.append(f"  - What's a common pitfall with {s} that you've personally hit?")
+        else:
+            lines.append("  (no JD skills detected)")
+
+    lines.append("")
+    if llm_hr:
+        lines.append("B. HR / behavioural questions (LLM-tailored to this role):")
+        lines.append("")
+        lines.append(llm_hr)
+    else:
+        lines += [
+            "B. HR / behavioural questions (standard set):",
+            "  - Tell me about yourself.",
+            "  - Why this role / why this company?",
+            "  - Walk me through your strongest project end-to-end.",
+            "  - Tell me about a time you disagreed with a teammate. What did you do?",
+            "  - Tell me about a time you failed and what you learned.",
+            "  - What's a weakness you're actively working on?",
+            "  - Where do you want to be in 2-3 years?",
+            "  - Why should we pick you over other candidates?",
+        ]
+    # Section C is only added when the user has supplied KB material.
+    topics = _extract_kb_topics(kb_text) if kb_text else []
+    if topics:
+        lines += [
+            "",
+            "C. Questions inspired by your KB / course material:",
+        ]
         seen = set()
         for kind, content in topics:
             if content in seen:
@@ -336,7 +721,6 @@ def generate_interview_questions(job_skills, kb_text):
                 lines.append(f"  [Topic] {content}")
                 lines.append(f"    - How would you explain '{content}' to a non-technical interviewer?")
             else:
-                # Trim long bullets so the question stays readable.
                 short = content if len(content) <= 110 else content[:107] + "..."
                 lines.append(f"    - In an interview, how would you respond to: \"{short}\"?")
             if len(seen) >= 25:
@@ -401,11 +785,50 @@ def read_tracker():
 
 
 def write_tracker(rows):
+    """Write tracker rows. Auto-backs up the existing file before overwriting."""
+    if os.path.exists(TRACKER_PATH):
+        backup = TRACKER_PATH + ".bak"
+        try:
+            with open(TRACKER_PATH, "r", encoding="utf-8") as src, \
+                 open(backup, "w", encoding="utf-8") as dst:
+                dst.write(src.read())
+        except OSError:
+            pass  # backup is best-effort; never block the write
     with open(TRACKER_PATH, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=TRACKER_FIELDS)
         writer.writeheader()
         for row in rows:
             writer.writerow({k: row.get(k, "") for k in TRACKER_FIELDS})
+
+
+def parse_flexible_date(raw):
+    """
+    Accept multiple common date formats from a layman:
+      2026-05-03   (ISO)
+      05/03/2026   (US M/D/Y)
+      03/05/2026   (DMY)  -> ambiguous, we trust ISO first then DMY
+      03-05-2026
+      May 3, 2026
+      3 May 2026
+    Returns 'YYYY-MM-DD' string on success, '' otherwise.
+    """
+    raw = (raw or "").strip()
+    if not raw:
+        return ""
+    formats = [
+        "%Y-%m-%d", "%Y/%m/%d",
+        "%d-%m-%Y", "%d/%m/%Y",
+        "%m-%d-%Y", "%m/%d/%Y",
+        "%d %b %Y", "%d %B %Y",
+        "%b %d, %Y", "%B %d, %Y",
+        "%b %d %Y", "%B %d %Y",
+    ]
+    for fmt in formats:
+        try:
+            return datetime.strptime(raw, fmt).strftime("%Y-%m-%d")
+        except ValueError:
+            continue
+    return ""
 
 
 def _next_application_id(rows):
@@ -428,15 +851,15 @@ def add_application(company, role, source="", status="Not Applied",
     new_id = _next_application_id(rows)
     rows.append({
         "application_id": new_id,
-        "company": company,
-        "role": role,
-        "source": source,
+        "company": company.strip(),
+        "role": role.strip(),
+        "source": source.strip(),
         "status": status,
-        "applied_date": applied_date,
-        "interview_date": interview_date,
-        "follow_up_date": follow_up_date,
-        "next_action": next_action,
-        "notes": notes,
+        "applied_date": parse_flexible_date(applied_date) or applied_date.strip(),
+        "interview_date": parse_flexible_date(interview_date) or interview_date.strip(),
+        "follow_up_date": parse_flexible_date(follow_up_date) or follow_up_date.strip(),
+        "next_action": next_action.strip(),
+        "notes": notes.strip(),
     })
     write_tracker(rows)
     return new_id
@@ -446,15 +869,23 @@ def update_application(application_id, **fields):
     """Update fields on an existing application. Returns True if found."""
     rows = read_tracker()
     found = False
+    old_status = ""
     for row in rows:
         if row.get("application_id") == application_id:
+            old_status = row.get("status", "")
             for k, v in fields.items():
                 if k in TRACKER_FIELDS:
-                    row[k] = v
+                    if k in ("applied_date", "interview_date", "follow_up_date"):
+                        row[k] = parse_flexible_date(v) or v
+                    else:
+                        row[k] = v
             found = True
+            new_status = row.get("status", "")
             break
     if found:
         write_tracker(rows)
+        if "status" in fields and fields["status"] != old_status:
+            log_status_change(application_id, old_status, fields["status"])
     return found
 
 
@@ -590,7 +1021,8 @@ def _guess_candidate_name(resume_text):
     return "[Your Name]"
 
 
-def generate_cover_letter(job_text, resume_text, matched, missing):
+def _template_cover_letter(job_text, resume_text, matched, missing):
+    """Template-based cover letter (no LLM). Used when LLM is unavailable."""
     role, company = _guess_role_and_company(job_text)
     name = _guess_candidate_name(resume_text)
     top_matches = matched[:5] if matched else []
@@ -604,16 +1036,17 @@ def generate_cover_letter(job_text, resume_text, matched, missing):
         f"would welcome the chance to contribute to {company}.",
         "",
     ]
-
     if top_matches:
-        skills_phrase = ", ".join(top_matches[:-1]) + (f", and {top_matches[-1]}" if len(top_matches) > 1 else top_matches[0])
+        if len(top_matches) > 1:
+            skills_phrase = ", ".join(top_matches[:-1]) + f", and {top_matches[-1]}"
+        else:
+            skills_phrase = top_matches[0]
         paragraphs.append(
             f"My most directly relevant strengths include {skills_phrase}. "
             "I have applied these in academic and self-directed projects — "
             "happy to walk through the code and the trade-offs in an interview."
         )
         paragraphs.append("")
-
     if top_growth:
         growth_phrase = ", ".join(top_growth)
         paragraphs.append(
@@ -621,7 +1054,6 @@ def generate_cover_letter(job_text, resume_text, matched, missing):
             "and I see this role as a chance to apply that work in a real team."
         )
         paragraphs.append("")
-
     paragraphs += [
         f"Thank you for considering my application. I would be glad to discuss how "
         f"I can contribute to {company} and to share specific examples from my "
@@ -633,13 +1065,73 @@ def generate_cover_letter(job_text, resume_text, matched, missing):
     return "\n".join(paragraphs) + "\n"
 
 
+def generate_cover_letter(job_text, resume_text, matched, missing):
+    """
+    Personalized cover letter via LLM if available, otherwise template fallback.
+    """
+    role, company = _guess_role_and_company(job_text)
+    name = _guess_candidate_name(resume_text)
+
+    if not llm_available():
+        return _template_cover_letter(job_text, resume_text, matched, missing)
+
+    system = (
+        "You are an expert career coach who writes concise, specific cover letters "
+        "for entry-level / internship candidates. You always quote one concrete "
+        "project from the candidate's resume. You never invent experience that is "
+        "not in the resume. You never use cliches like 'I am writing to express my "
+        "interest' or 'team player'. You write in the candidate's voice."
+    )
+    prompt = f"""Write a 3-paragraph cover letter for this candidate applying to this role.
+
+Constraints:
+- Open with a direct first line (NOT "I am writing to express..."). Mention the role and one specific reason this company is interesting based on the JD.
+- Middle paragraph: quote ONE specific project from the resume by name and explain how it maps to the JD. Use the JD's vocabulary where natural.
+- Close: brief, confident, no boilerplate. End with "Sincerely," then "{name}".
+- Total length: 180-260 words. No bullet points.
+- Address it to "Dear Hiring Team at {company},".
+- Never invent skills or experience that aren't in the resume.
+
+JOB POSTING:
+\"\"\"
+{job_text[:3000]}
+\"\"\"
+
+CANDIDATE'S RESUME:
+\"\"\"
+{resume_text[:3000]}
+\"\"\"
+
+JD skills the candidate already has: {', '.join(matched) if matched else 'none'}
+JD skills the candidate is missing: {', '.join(missing) if missing else 'none'}
+"""
+    text = call_llm(prompt, system=system, max_tokens=600, temperature=0.5)
+    if not text:
+        return _template_cover_letter(job_text, resume_text, matched, missing)
+
+    if not text.endswith("\n"):
+        text += "\n"
+    return text
+
+
 # --- Project-to-JD mapping ------------------------------------------------- #
 
 _PROJECT_HEADER_RE = re.compile(r"^\s*\d+[.)]\s+(.+)$")
 
 
+_PROJECT_SECTION_HEADERS = (
+    "projects", "project experience", "personal projects", "academic projects",
+    "selected projects", "side projects", "key projects", "portfolio",
+)
+
+
+def _is_project_header(line_stripped):
+    low = line_stripped.lower().rstrip(":").strip()
+    return low in _PROJECT_SECTION_HEADERS
+
+
 def _split_resume_projects(resume_text):
-    """Heuristic split: find a 'Projects:' section and group bullets per project."""
+    """Heuristic split: find a Projects-style section and group bullets per project."""
     lines = resume_text.splitlines()
     projects = []
     in_projects = False
@@ -648,13 +1140,13 @@ def _split_resume_projects(resume_text):
     for raw in lines:
         line = raw.rstrip()
         stripped = line.strip()
-        if re.match(r"^Projects\s*:?\s*$", stripped, re.IGNORECASE):
+        if _is_project_header(stripped):
             in_projects = True
             continue
         if not in_projects:
             continue
-        # Stop when we hit another major section header.
-        if re.match(r"^[A-Z][A-Za-z ]+:\s*$", stripped) and not stripped.lower().startswith("project"):
+        # Stop when we hit another major section header (line ending with ':').
+        if re.match(r"^[A-Z][A-Za-z ]+:\s*$", stripped) and not _is_project_header(stripped):
             break
 
         m = _PROJECT_HEADER_RE.match(line)
@@ -785,6 +1277,147 @@ def write_memory_snapshot(payload):
 
 
 # --------------------------------------------------------------------------- #
+# Phase 10: calendar export, status history log, PDF export
+# --------------------------------------------------------------------------- #
+
+STATUS_HISTORY_PATH = os.path.join(TRACKER_DIR, "status_history.log")
+
+
+def log_status_change(application_id, old_status, new_status, note=""):
+    """Append-only log of status transitions. Lets the user see when things changed."""
+    os.makedirs(TRACKER_DIR, exist_ok=True)
+    line = (
+        f"{datetime.now():%Y-%m-%d %H:%M:%S}\t{application_id}\t"
+        f"{old_status or '(new)'} -> {new_status}\t{note}\n"
+    )
+    with open(STATUS_HISTORY_PATH, "a", encoding="utf-8") as f:
+        f.write(line)
+
+
+def _ics_escape(text):
+    """Minimal RFC 5545 escaping for TEXT values."""
+    if text is None:
+        return ""
+    return (text.replace("\\", "\\\\")
+                .replace(",", "\\,")
+                .replace(";", "\\;")
+                .replace("\n", "\\n"))
+
+
+def _ics_event(uid, summary, dt_start, dt_end, description=""):
+    fmt = "%Y%m%dT%H%M%S"
+    return "\r\n".join([
+        "BEGIN:VEVENT",
+        f"UID:{uid}",
+        f"DTSTAMP:{datetime.utcnow().strftime(fmt)}Z",
+        f"DTSTART:{dt_start.strftime(fmt)}",
+        f"DTEND:{dt_end.strftime(fmt)}",
+        f"SUMMARY:{_ics_escape(summary)}",
+        f"DESCRIPTION:{_ics_escape(description)}",
+        "END:VEVENT",
+    ])
+
+
+def export_calendar_ics(path=None):
+    """
+    Build a `.ics` file from interview_date / follow_up_date in the tracker.
+    Returns the output path. Layman use: import this file into Google
+    Calendar / Apple Calendar / Outlook to see all upcoming actions.
+    """
+    if path is None:
+        path = os.path.join(TRACKER_DIR, "calendar.ics")
+    rows = read_tracker()
+
+    events = []
+    for row in rows:
+        app_id = row.get("application_id", "?")
+        company = row.get("company", "")
+        role = row.get("role", "")
+        next_action = row.get("next_action", "")
+
+        idate = _parse_date(row.get("interview_date"))
+        if idate:
+            start = datetime.combine(idate, datetime.min.time().replace(hour=10))
+            end = start.replace(hour=11)
+            events.append(_ics_event(
+                uid=f"{app_id}-interview@careerprep",
+                summary=f"Interview: {company} — {role}",
+                dt_start=start, dt_end=end,
+                description=f"Application {app_id}\nNext action: {next_action}",
+            ))
+
+        fdate = _parse_date(row.get("follow_up_date"))
+        if fdate:
+            start = datetime.combine(fdate, datetime.min.time().replace(hour=9))
+            end = start.replace(hour=9, minute=15)
+            events.append(_ics_event(
+                uid=f"{app_id}-followup@careerprep",
+                summary=f"Follow up: {company} — {role}",
+                dt_start=start, dt_end=end,
+                description=f"Application {app_id}: send a follow-up note.",
+            ))
+
+    body = "\r\n".join([
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//CareerPrep//Job-Hunting Agent//EN",
+        "CALSCALE:GREGORIAN",
+        *events,
+        "END:VCALENDAR",
+        "",
+    ])
+    save_text(path, body)
+    return path
+
+
+def export_final_report_pdf(text=None, path=None):
+    """
+    Render the final combined report as a PDF. Returns the output path,
+    or None if `fpdf2` is not installed or rendering fails (graceful fallback —
+    the PDF is a nice-to-have and must never block other outputs).
+    """
+    if not _FPDF_AVAILABLE:
+        return None
+
+    if text is None:
+        src = os.path.join(OUTPUT_DIR, "final_agent_report.txt")
+        if not os.path.exists(src):
+            return None
+        with open(src, "r", encoding="utf-8") as f:
+            text = f.read()
+
+    if path is None:
+        path = os.path.join(OUTPUT_DIR, "final_agent_report.pdf")
+
+    try:
+        import textwrap
+        pdf = FPDF()
+        pdf.set_auto_page_break(auto=True, margin=15)
+        pdf.add_page()
+        pdf.set_font("Helvetica", size=10)
+
+        # FPDF (the latin1-only classic) chokes on smart quotes / em dashes /
+        # the box-drawing chars our reports use. Strip to ASCII first.
+        safe_text = text.encode("ascii", "replace").decode("ascii")
+
+        for raw in safe_text.splitlines():
+            if not raw.strip():
+                pdf.ln(4)
+                continue
+            # Hard-wrap to a width that always fits, avoiding multi_cell's
+            # "not enough horizontal space" edge case with long unbroken tokens.
+            for chunk in textwrap.wrap(raw, width=95, break_long_words=True) or [""]:
+                pdf.cell(0, 5, chunk)
+                pdf.ln(5)
+
+        pdf.output(path)
+        return path
+    except Exception as e:
+        print(f"  ! PDF export skipped: {e}")
+        return None
+
+
+# --------------------------------------------------------------------------- #
 # Phase 5: orchestration + final combined report + CLI menu
 # --------------------------------------------------------------------------- #
 
@@ -817,21 +1450,41 @@ def run_analysis(verbose=True):
         print(f"  input_resumes/ : {resume_count} file(s) {resume_files}")
         print(f"  input_kb/      : {kb_count} file(s) {kb_files}")
 
-    if job_count == 0 or resume_count == 0 or kb_count == 0:
-        print("\nMissing inputs. Copy a sample to get started:")
+    if job_count == 0 or resume_count == 0:
+        print("\nMissing required inputs. Copy a sample to get started:")
         print(f"  cp {SAMPLES_DIR}/sample_job_poster.txt {JOB_DIR}/")
         print(f"  cp {SAMPLES_DIR}/sample_resume.txt     {RESUME_DIR}/")
-        print(f"  cp {SAMPLES_DIR}/sample_kb.txt         {KB_DIR}/")
+        print(f"  (input_kb/ is optional — drop course slide notes there for KB-derived "
+              f"interview questions)")
         return None
+    if kb_count == 0 and verbose:
+        print("  (input_kb/ is empty — skipping KB-derived interview questions)")
 
     job_skills = extract_keywords(job_text)
     resume_skills = extract_keywords(resume_text)
     matched, missing, score = compare_skills(job_skills, resume_skills)
 
-    job_report = generate_job_analysis(job_files, job_skills)
+    extra_terms = surface_extra_jd_terms(job_text, KEYWORDS)
+
+    if not job_skills and verbose:
+        print("\n  ! No known skills detected in the job poster.")
+        print("    Either the JD uses unusual terminology, or the file isn't really a JD.")
+        if extra_terms:
+            print(f"    However, these capitalized phrases stood out: {', '.join(extra_terms[:5])}")
+    if not resume_skills and verbose:
+        print("\n  ! No known skills detected in the resume.")
+        print("    If your resume is a PDF that looks like a scanned image, "
+              "the text may not be extractable. Paste the resume into a .txt file instead.")
+
+    job_report = generate_job_analysis(job_files, job_skills, extra_terms=extra_terms)
     gap_report = generate_skill_gap_report(job_skills, resume_skills, matched, missing, score)
-    resume_suggestions = generate_resume_suggestions(matched, missing)
-    interview_questions = generate_interview_questions(job_skills, kb_text)
+    resume_suggestions = generate_resume_suggestions(
+        matched, missing, resume_text=resume_text, job_text=job_text,
+    )
+    interview_questions = generate_interview_questions(
+        job_skills, kb_text,
+        job_text=job_text, resume_text=resume_text, missing=missing,
+    )
     cover_letter = generate_cover_letter(job_text, resume_text, matched, missing)
     project_mapping = generate_project_mapping(resume_text, job_skills)
     quality_report = generate_resume_quality_report(resume_text, job_skills, resume_skills, matched)
@@ -861,6 +1514,9 @@ def run_analysis(verbose=True):
     save_text(os.path.join(OUTPUT_DIR, "final_agent_report.txt"), final_report)
     save_text(REMINDERS_PATH, reminders)
 
+    ics_path = export_calendar_ics()
+    pdf_path = export_final_report_pdf(text=final_report)
+
     memory_path = write_memory_snapshot({
         "generated_at": datetime.now().isoformat(timespec="seconds"),
         "inputs": {
@@ -882,6 +1538,11 @@ def run_analysis(verbose=True):
         print(f"Resume quality score: {quality_score} / 100")
         print(f"Tracked applications: {len(read_tracker())}")
         print(f"\nWrote 8 files in outputs/, plus tracker/reminders.txt and {memory_path}.")
+        print(f"Calendar:    {ics_path}  (import into Google / Apple Calendar)")
+        if pdf_path:
+            print(f"PDF report:  {pdf_path}")
+        else:
+            print("PDF report:  skipped (install fpdf2 to enable)")
 
     return {
         "score": score,

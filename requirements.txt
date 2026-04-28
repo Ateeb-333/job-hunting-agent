@@ -1,4 +1,9 @@
 # Core agent runs on Python 3.9+ standard library only.
-# Optional dependencies for unique features (Phase 6):
+# Optional dependencies enable extra features:
 
-pypdf>=4.0          # PDF reading for input_jobs/, input_resumes/, input_kb/
+pypdf>=4.0          # PDF input reading (input_jobs/, input_resumes/, input_kb/)
+fpdf2>=2.7          # PDF export of the final report
+streamlit>=1.30     # Web UI: drag-drop uploads, click-to-analyze, tracker forms
+pandas>=1.5         # Used by the Streamlit dashboard for tables & charts
+openai>=1.40        # OpenRouter (OpenAI-compatible) for LLM-tailored cover letter,
+                    # interview questions, and resume rewrites — see .env.example

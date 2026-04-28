@@ -1,12 +1,11 @@
 Dear Hiring Team at ABC Tech,
 
-I am writing to apply for the Junior AI Engineer Intern position. I am a final-year computer science student with hands-on experience in the areas you describe, and I would welcome the chance to contribute to ABC Tech.
+Your Junior AI Engineer Internship appeals to me because you're building production systems where interns work on real client projects—exactly where I want to apply what I've learned in coursework and push beyond tutorials. The combination of hands-on model training, API integration, and collaborative code review is the practical experience I'm looking for.
 
-My most directly relevant strengths include communication, css, flask, git, and github. I have applied these in academic and self-directed projects — happy to walk through the code and the trade-offs in an interview.
+In my Student Performance Predictor course project, I built a regression model using pandas and scikit-learn to preprocess and clean a dataset of 500 records, then documented the full pipeline in a Jupyter notebook. That project taught me the core workflow of data preprocessing and model evaluation, and I'm ready to scale it up. I've also built a Flask application with SQLite for my Task Tracker, so I understand how to connect trained models to backend systems. I'm comfortable with Git and GitHub for version control, and I've explored TensorFlow on my own to deepen my ML foundation.
 
-I am also actively building experience in api, data preprocessing, deep learning, and I see this role as a chance to apply that work in a real team.
-
-Thank you for considering my application. I would be glad to discuss how I can contribute to ABC Tech and to share specific examples from my projects that match your requirements.
+I'm aware I need to develop hands-on experience with SQL, REST APIs, and Linux in a production setting—that's precisely why this internship matters to me. I learn quickly, communicate clearly, and I'm ready to contribute from day one while growing into the full scope of your team's work.
 
 Sincerely,
+
 Ahmed Khan

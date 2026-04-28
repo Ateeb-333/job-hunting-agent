@@ -1,40 +1,47 @@
 Tailored Resume Suggestions
 ===========================
-Generated: 2026-04-28 14:06:23
+Generated: 2026-04-29 01:53:27
+Mode: LLM-tailored (rewrites your actual bullets in JD vocabulary)
 
-1) Strengthen these bullets — you already have evidence, make sure it's visible:
-  + [communication] Presented technical work to non-technical stakeholders; wrote clear README/docs.
-  + [css] Styled responsive layouts using modern CSS (flexbox, grid).
-  + [flask] Built and deployed Flask web apps with templating, sessions, and route handlers.
-  + [git] Used Git feature-branch workflow with clear commit messages and rebases.
-  + [github] Used GitHub for version control, pull requests, and code review on team projects.
-  + [html] Built HTML5 layouts with semantic markup and accessible structure.
-  + [jupyter] Documented experiments and findings in Jupyter notebooks with reproducible cells.
-  + [machine learning] Trained and evaluated ML models, reporting accuracy / precision / recall on a held-out test set.
-  + [numpy] Used numpy for vectorized numerical computation and array manipulation.
-  + [oop] Applied OOP design (encapsulation, inheritance, polymorphism) to keep code modular.
-  + [pandas] Used pandas for data cleaning, joining, and aggregation on real-world datasets.
-  + [problem solving] Broke down ambiguous problems, scoped a solution, and shipped iteratively.
-  + [python] Wrote production-quality Python (OOP, error handling, virtual envs) for your project.
-  + [scikit-learn] Used scikit-learn (pipelines, model selection, metrics) for classical ML tasks.
-  + [tensorflow] Trained models in TensorFlow / Keras and exported them for inference.
-  + [version control] Used Git/GitHub version control with branches, PRs, and code review.
+ORIGINAL: Built a regression model using pandas and scikit-learn to predict student GPA.
+REWRITE: Built and trained a machine learning regression model using pandas and scikit-learn to predict student GPA from preprocessed data.
+WHY: Adds "trained" and "preprocessed" to directly mirror JD language for model training and data preprocessing responsibilities.
 
-2) Close these gaps before applying — the JD asks for them, your resume doesn't show them:
-  - [api] Suggested bullet: Designed and consumed REST APIs; handled auth, pagination, and error responses.
-  - [data preprocessing] Suggested bullet: Built data preprocessing pipelines (missing-value imputation, encoding, scaling) avoiding train/test leakage.
-  - [deep learning] Suggested bullet: Trained neural networks (feed-forward / CNN) and tuned hyperparameters.
-  - [etl] Suggested bullet: Built ETL jobs that extracted from source systems, transformed records, and loaded warehouses.
-  - [linux] Suggested bullet: Comfortable on Linux command line: shell scripting, file permissions, processes.
-  - [prompt engineering] Suggested bullet: Drafted, tested, and iterated on LLM prompts; measured output quality across versions.
-  - [pytorch] Suggested bullet: Built and trained PyTorch models with custom datasets and training loops.
-  - [rest] Suggested bullet: Designed and consumed REST endpoints; followed status-code and resource conventions.
-  - [sql] Suggested bullet: Wrote SQL (JOINs, GROUP BY, window functions) against a relational database.
-  - [streamlit] Suggested bullet: Shipped interactive Streamlit apps to demo data/ML projects.
+ORIGINAL: Cleaned and preprocessed a dataset of 500 records.
+REWRITE: Performed data preprocessing and cleaning on 500 student records to prepare for model training.
+REWRITE: Performed data preprocessing and cleaning on 500 student records, implementing ETL techniques to prepare data for model training.
+WHY: Reframes preprocessing as an ETL pipeline activity, matching JD terminology for data pipeline work.
 
-3) General resume hygiene:
-  . Lead each bullet with a strong verb (Built, Shipped, Analyzed, Reduced).
-  . Quantify outcomes where possible (rows processed, accuracy %, time saved).
-  . Match terminology to the JD: if the JD says 'REST API', don't write 'web service'.
-  . Keep it to one page; cut anything older than 2 years that isn't load-bearing.
-  . Link to GitHub for every project bullet that has source code.
+ORIGINAL: Flask application with HTML/CSS frontend.
+REWRITE: Developed a Flask web application with HTML/CSS frontend for task management.
+WHY: Clarifies the Flask role and adds "developed" to show active ownership of the API layer.
+
+ORIGINAL: SQLite database for task storage.
+REWRITE: Designed and implemented SQLite relational database schema for persistent task storage.
+WHY: Adds "relational database" language from JD and shows schema design understanding.
+
+ORIGINAL: Used Git for version control with feature-branch workflow.
+REWRITE: Managed version control using Git and GitHub with feature-branch workflow for collaborative development.
+WHY: Explicitly names GitHub and adds "collaborative" to match JD's emphasis on team collaboration.
+
+ORIGINAL: Followed a tutorial to build a CNN with TensorFlow.
+REWRITE: Built and trained a convolutional neural network using TensorFlow, documenting the deep learning pipeline in Jupyter notebooks.
+WHY: Adds "deep learning" terminology and emphasizes documentation in Jupyter, both valued in the JD.
+
+ORIGINAL: Member, FAST AI Society.
+REWRITE: Active member of FAST AI Society, participating in collaborative projects and technical discussions.
+WHY: Adds "collaborative" language to show teamwork and engagement, supporting the JD's emphasis on code reviews and standups.
+
+---
+
+BULLETS TO ADD:
+
+1. Exposure to REST APIs and Flask integration: "Integrated a trained machine learning model with a Flask REST API endpoint to serve predictions, demonstrating model-to-production workflow."
+
+2. SQL and relational database querying: "Wrote SQL queries to extract and aggregate data from relational databases for exploratory data analysis in Jupyter notebooks."
+
+3. Linux command-line basics: "Practiced Linux command-line operations (file navigation, permissions, package management) for local development environment setup."
+
+4. Code documentation and collaboration practices: "Documented machine learning experiments, code logic, and findings in Jupyter notebooks and GitHub README files for team review."
+
+5. Prompt engineering or LLM API exposure: "Experimented with OpenAI API prompts to generate synthetic training data for the Image Classifier project."

@@ -1,18 +1,19 @@
 CareerPrep Job-Hunting Agent — Final Report
 ===========================================
-Generated: 2026-04-28 14:06:23
+Generated: 2026-04-29 01:53:42
 
 
 ##### JOB ANALYSIS #####
 Job Analysis Report
 ===================
-Generated: 2026-04-28 14:06:23
+Generated: 2026-04-29 01:53:20
 
 Job posters analyzed: 1
   - sample_job_poster.txt
 
-Skills / keywords detected (26):
+Skills / keywords detected (28):
   - api
+  - collaboration
   - communication
   - css
   - data preprocessing
@@ -24,6 +25,7 @@ Skills / keywords detected (26):
   - html
   - jupyter
   - linux
+  - llm
   - machine learning
   - numpy
   - oop
@@ -39,13 +41,17 @@ Skills / keywords detected (26):
   - tensorflow
   - version control
 
+Other notable terms in the JD (not in the agent's known skill list):
+  ? Junior AI Engineer
+  (consider whether any of these are skills you should highlight)
+
 
 ##### SKILL GAP #####
 Skill Gap Report
 ================
-Generated: 2026-04-28 14:06:23
+Generated: 2026-04-29 01:53:20
 
-Match score: 61.54%  (16 of 26 job skills found in resume)
+Match score: 57.14%  (16 of 28 job skills found in resume)
 
 Matched skills (16):
   + communication
@@ -65,35 +71,42 @@ Matched skills (16):
   + tensorflow
   + version control
 
-Missing skills (10):
+Missing skills (12):
   - api
+  - collaboration
   - data preprocessing
   - deep learning
   - etl
   - linux
+  - llm
   - prompt engineering
   - pytorch
   - rest
   - sql
   - streamlit
 
-Resume-only skills (3):
+Resume-only skills (8):
   (skills you have that this JD didn't ask for — keep them, they may matter for other roles)
+  . algorithms
   . c++
+  . data structures
   . database
   . java
+  . sqlite
+  . teamwork
+  . vs code
 
 
 ##### RESUME QUALITY SCORE #####
 Resume Quality Score
 ====================
-Generated: 2026-04-28 14:06:23
+Generated: 2026-04-29 01:53:42
 
-Overall: 74.9 / 100
+Overall: 73.2 / 100
 
 Breakdown:
-  JD alignment            24.6 / 40    16/26 JD skills present
-  Skill breadth             15 / 15    19 distinct skills detected
+  JD alignment            22.9 / 40    16/28 JD skills present
+  Skill breadth             15 / 15    24 distinct skills detected
   Projects section          15 / 15    3 project(s) found
   Quantified bullets       1.7 / 10    3/18 bullets contain numbers
   Contact + GitHub          10 / 10    10/10 (email + github.com link expected)
@@ -103,63 +116,70 @@ Breakdown:
 ##### TAILORED RESUME SUGGESTIONS #####
 Tailored Resume Suggestions
 ===========================
-Generated: 2026-04-28 14:06:23
+Generated: 2026-04-29 01:53:27
+Mode: LLM-tailored (rewrites your actual bullets in JD vocabulary)
 
-1) Strengthen these bullets — you already have evidence, make sure it's visible:
-  + [communication] Presented technical work to non-technical stakeholders; wrote clear README/docs.
-  + [css] Styled responsive layouts using modern CSS (flexbox, grid).
-  + [flask] Built and deployed Flask web apps with templating, sessions, and route handlers.
-  + [git] Used Git feature-branch workflow with clear commit messages and rebases.
-  + [github] Used GitHub for version control, pull requests, and code review on team projects.
-  + [html] Built HTML5 layouts with semantic markup and accessible structure.
-  + [jupyter] Documented experiments and findings in Jupyter notebooks with reproducible cells.
-  + [machine learning] Trained and evaluated ML models, reporting accuracy / precision / recall on a held-out test set.
-  + [numpy] Used numpy for vectorized numerical computation and array manipulation.
-  + [oop] Applied OOP design (encapsulation, inheritance, polymorphism) to keep code modular.
-  + [pandas] Used pandas for data cleaning, joining, and aggregation on real-world datasets.
-  + [problem solving] Broke down ambiguous problems, scoped a solution, and shipped iteratively.
-  + [python] Wrote production-quality Python (OOP, error handling, virtual envs) for your project.
-  + [scikit-learn] Used scikit-learn (pipelines, model selection, metrics) for classical ML tasks.
-  + [tensorflow] Trained models in TensorFlow / Keras and exported them for inference.
-  + [version control] Used Git/GitHub version control with branches, PRs, and code review.
+ORIGINAL: Built a regression model using pandas and scikit-learn to predict student GPA.
+REWRITE: Built and trained a machine learning regression model using pandas and scikit-learn to predict student GPA from preprocessed data.
+WHY: Adds "trained" and "preprocessed" to directly mirror JD language for model training and data preprocessing responsibilities.
 
-2) Close these gaps before applying — the JD asks for them, your resume doesn't show them:
-  - [api] Suggested bullet: Designed and consumed REST APIs; handled auth, pagination, and error responses.
-  - [data preprocessing] Suggested bullet: Built data preprocessing pipelines (missing-value imputation, encoding, scaling) avoiding train/test leakage.
-  - [deep learning] Suggested bullet: Trained neural networks (feed-forward / CNN) and tuned hyperparameters.
-  - [etl] Suggested bullet: Built ETL jobs that extracted from source systems, transformed records, and loaded warehouses.
-  - [linux] Suggested bullet: Comfortable on Linux command line: shell scripting, file permissions, processes.
-  - [prompt engineering] Suggested bullet: Drafted, tested, and iterated on LLM prompts; measured output quality across versions.
-  - [pytorch] Suggested bullet: Built and trained PyTorch models with custom datasets and training loops.
-  - [rest] Suggested bullet: Designed and consumed REST endpoints; followed status-code and resource conventions.
-  - [sql] Suggested bullet: Wrote SQL (JOINs, GROUP BY, window functions) against a relational database.
-  - [streamlit] Suggested bullet: Shipped interactive Streamlit apps to demo data/ML projects.
+ORIGINAL: Cleaned and preprocessed a dataset of 500 records.
+REWRITE: Performed data preprocessing and cleaning on 500 student records to prepare for model training.
+REWRITE: Performed data preprocessing and cleaning on 500 student records, implementing ETL techniques to prepare data for model training.
+WHY: Reframes preprocessing as an ETL pipeline activity, matching JD terminology for data pipeline work.
 
-3) General resume hygiene:
-  . Lead each bullet with a strong verb (Built, Shipped, Analyzed, Reduced).
-  . Quantify outcomes where possible (rows processed, accuracy %, time saved).
-  . Match terminology to the JD: if the JD says 'REST API', don't write 'web service'.
-  . Keep it to one page; cut anything older than 2 years that isn't load-bearing.
-  . Link to GitHub for every project bullet that has source code.
+ORIGINAL: Flask application with HTML/CSS frontend.
+REWRITE: Developed a Flask web application with HTML/CSS frontend for task management.
+WHY: Clarifies the Flask role and adds "developed" to show active ownership of the API layer.
+
+ORIGINAL: SQLite database for task storage.
+REWRITE: Designed and implemented SQLite relational database schema for persistent task storage.
+WHY: Adds "relational database" language from JD and shows schema design understanding.
+
+ORIGINAL: Used Git for version control with feature-branch workflow.
+REWRITE: Managed version control using Git and GitHub with feature-branch workflow for collaborative development.
+WHY: Explicitly names GitHub and adds "collaborative" to match JD's emphasis on team collaboration.
+
+ORIGINAL: Followed a tutorial to build a CNN with TensorFlow.
+REWRITE: Built and trained a convolutional neural network using TensorFlow, documenting the deep learning pipeline in Jupyter notebooks.
+WHY: Adds "deep learning" terminology and emphasizes documentation in Jupyter, both valued in the JD.
+
+ORIGINAL: Member, FAST AI Society.
+REWRITE: Active member of FAST AI Society, participating in collaborative projects and technical discussions.
+WHY: Adds "collaborative" language to show teamwork and engagement, supporting the JD's emphasis on code reviews and standups.
+
+---
+
+BULLETS TO ADD:
+
+1. Exposure to REST APIs and Flask integration: "Integrated a trained machine learning model with a Flask REST API endpoint to serve predictions, demonstrating model-to-production workflow."
+
+2. SQL and relational database querying: "Wrote SQL queries to extract and aggregate data from relational databases for exploratory data analysis in Jupyter notebooks."
+
+3. Linux command-line basics: "Practiced Linux command-line operations (file navigation, permissions, package management) for local development environment setup."
+
+4. Code documentation and collaboration practices: "Documented machine learning experiments, code logic, and findings in Jupyter notebooks and GitHub README files for team review."
+
+5. Prompt engineering or LLM API exposure: "Experimented with OpenAI API prompts to generate synthetic training data for the Image Classifier project."
 
 
 ##### PROJECT-TO-JD MAPPING #####
 Project-to-JD Mapping
 =====================
-Generated: 2026-04-28 14:06:23
+Generated: 2026-04-29 01:53:42
 
 Found 3 project(s). Showing JD coverage per project:
 
 - Student Performance Predictor (Course Project)
-    JD coverage: 15.4%  (4 of 26 JD skills)
+    JD coverage: 14.3%  (4 of 28 JD skills)
     Mapped skills: github, jupyter, pandas, scikit-learn
 
 - Task Tracker Web App
-    JD coverage: 19.2%  (5 of 26 JD skills)
+    JD coverage: 17.9%  (5 of 28 JD skills)
     Mapped skills: css, flask, git, html, version control
 
 - Image Classifier (Self-Learning)
-    JD coverage: 3.8%  (1 of 26 JD skills)
+    JD coverage: 3.6%  (1 of 28 JD skills)
     Mapped skills: tensorflow
 
 
@@ -167,71 +187,41 @@ Found 3 project(s). Showing JD coverage per project:
 ##### INTERVIEW QUESTIONS #####
 Interview Questions
 ===================
-Generated: 2026-04-28 14:06:23
+Generated: 2026-04-29 01:53:27
+Mode: LLM-tailored
 
-A. Technical questions (derived from the job posters):
-  - Walk me through a project where you used api. What trade-offs did you make?
-  - What's a common pitfall with api that you've personally hit?
-  - Walk me through a project where you used communication. What trade-offs did you make?
-  - What's a common pitfall with communication that you've personally hit?
-  - Walk me through a project where you used css. What trade-offs did you make?
-  - What's a common pitfall with css that you've personally hit?
-  - Walk me through a project where you used data preprocessing. What trade-offs did you make?
-  - What's a common pitfall with data preprocessing that you've personally hit?
-  - Walk me through a project where you used deep learning. What trade-offs did you make?
-  - What's a common pitfall with deep learning that you've personally hit?
-  - Walk me through a project where you used etl. What trade-offs did you make?
-  - What's a common pitfall with etl that you've personally hit?
-  - Walk me through a project where you used flask. What trade-offs did you make?
-  - What's a common pitfall with flask that you've personally hit?
-  - Walk me through a project where you used git. What trade-offs did you make?
-  - What's a common pitfall with git that you've personally hit?
-  - Walk me through a project where you used github. What trade-offs did you make?
-  - What's a common pitfall with github that you've personally hit?
-  - Walk me through a project where you used html. What trade-offs did you make?
-  - What's a common pitfall with html that you've personally hit?
-  - Walk me through a project where you used jupyter. What trade-offs did you make?
-  - What's a common pitfall with jupyter that you've personally hit?
-  - Walk me through a project where you used linux. What trade-offs did you make?
-  - What's a common pitfall with linux that you've personally hit?
-  - Walk me through a project where you used machine learning. What trade-offs did you make?
-  - What's a common pitfall with machine learning that you've personally hit?
-  - Walk me through a project where you used numpy. What trade-offs did you make?
-  - What's a common pitfall with numpy that you've personally hit?
-  - Walk me through a project where you used oop. What trade-offs did you make?
-  - What's a common pitfall with oop that you've personally hit?
-  - Walk me through a project where you used pandas. What trade-offs did you make?
-  - What's a common pitfall with pandas that you've personally hit?
-  - Walk me through a project where you used problem solving. What trade-offs did you make?
-  - What's a common pitfall with problem solving that you've personally hit?
-  - Walk me through a project where you used prompt engineering. What trade-offs did you make?
-  - What's a common pitfall with prompt engineering that you've personally hit?
-  - Walk me through a project where you used python. What trade-offs did you make?
-  - What's a common pitfall with python that you've personally hit?
-  - Walk me through a project where you used pytorch. What trade-offs did you make?
-  - What's a common pitfall with pytorch that you've personally hit?
-  - Walk me through a project where you used rest. What trade-offs did you make?
-  - What's a common pitfall with rest that you've personally hit?
-  - Walk me through a project where you used scikit-learn. What trade-offs did you make?
-  - What's a common pitfall with scikit-learn that you've personally hit?
-  - Walk me through a project where you used sql. What trade-offs did you make?
-  - What's a common pitfall with sql that you've personally hit?
-  - Walk me through a project where you used streamlit. What trade-offs did you make?
-  - What's a common pitfall with streamlit that you've personally hit?
-  - Walk me through a project where you used tensorflow. What trade-offs did you make?
-  - What's a common pitfall with tensorflow that you've personally hit?
-  - Walk me through a project where you used version control. What trade-offs did you make?
-  - What's a common pitfall with version control that you've personally hit?
+A. Technical questions (LLM-picked, tailored to your resume + the JD):
 
-B. HR / behavioral questions (standard set):
-  - Tell me about yourself.
-  - Why this role / why this company?
-  - Walk me through your strongest project end-to-end.
-  - Tell me about a time you disagreed with a teammate. What did you do?
-  - Tell me about a time you failed and what you learned.
-  - What's a weakness you're actively working on?
-  - Where do you want to be in 2-3 years?
-  - Why should we pick you over other candidates?
+1. Walk me through your Student Performance Predictor project. What preprocessing steps did you take on those 500 records, and if you had to handle a dataset with 10x more rows and missing values in 40% of a column, how would your approach change?
+   **What I'd watch for:** Specific mention of pandas methods (fillna, dropna, imputation strategies), awareness of scalability trade-offs, and whether they'd actually test their approach.
+
+2. In your Task Tracker app, you used SQLite. Describe a query you wrote—what did it do? Now imagine you need to fetch all tasks for a user along with their category names from a separate table, and the query is slow. Walk me through how you'd debug and optimize it.
+
+3. You followed a TensorFlow tutorial for the Image Classifier. What did you actually learn about *why* CNNs work for images, versus just running the code? If I asked you to switch to PyTorch tomorrow, what would be genuinely hard for you?
+   **What I'd watch for:** Honest answer about depth vs. tutorial-following; willingness to admit gaps; understanding of convolution concepts, not just API calls.
+
+4. Your GitHub shows feature-branch workflow on the Task Tracker. Describe a merge conflict you've actually hit—what caused it, and how did you resolve it? If not, walk me through how you'd handle one.
+
+5. You've taken a Machine Learning course. In your Student Performance Predictor, how did you decide whether to use linear regression versus another model? What metrics did you use to evaluate it, and did you do any train/test split validation?
+
+6. The role involves REST API integration with trained models. You've built Flask apps—have you ever *called* an external API from Python (e.g., using requests library) or integrated a model endpoint? If not, talk through how you'd approach it.
+
+7. Tell me about a time you had to debug a Python script that wasn't working. What tools or techniques did you use? How comfortable are you with Linux command line for tasks like checking logs or running scripts in the background?
+
+8. You listed "Communication" and "Teamwork" as soft skills. Give me a concrete example from a group project or coursework where you had to explain a technical decision to someone less familiar with the topic, or where you disagreed with a teammate's approach.
+
+
+B. HR / behavioural questions (LLM-tailored to this role):
+
+1. Walk me through your Student Performance Predictor project. What specific data quality issues did you encounter during preprocessing, and how did you decide which approach to use to handle them?
+
+2. In your Task Tracker app, you used a feature-branch workflow on Git. Describe a situation where your approach to branching or merging didn't work as expected, and what you learned from it.
+
+3. Tell me about your self-learning experience with TensorFlow and the image classifier. What made you choose TensorFlow over PyTorch, and how did you validate that your model was actually working correctly?
+
+4. Imagine you've preprocessed a dataset and trained a model that performs well in your notebook, but when integrated into a Flask API, predictions are inconsistent. Walk me through how you'd debug this issue.
+
+5. You've taken both Machine Learning and Artificial Intelligence courses. Give me an example of a concept from one of these classes that surprised you or challenged your initial understanding, and how you worked through it.
 
 C. Questions inspired by your KB / course material:
   [Topic] Tell Me About Yourself
@@ -276,27 +266,26 @@ D. Questions YOU should ask the interviewer:
 ##### COVER LETTER DRAFT #####
 Dear Hiring Team at ABC Tech,
 
-I am writing to apply for the Junior AI Engineer Intern position. I am a final-year computer science student with hands-on experience in the areas you describe, and I would welcome the chance to contribute to ABC Tech.
+Your Junior AI Engineer Internship appeals to me because you're building production systems where interns work on real client projects—exactly where I want to apply what I've learned in coursework and push beyond tutorials. The combination of hands-on model training, API integration, and collaborative code review is the practical experience I'm looking for.
 
-My most directly relevant strengths include communication, css, flask, git, and github. I have applied these in academic and self-directed projects — happy to walk through the code and the trade-offs in an interview.
+In my Student Performance Predictor course project, I built a regression model using pandas and scikit-learn to preprocess and clean a dataset of 500 records, then documented the full pipeline in a Jupyter notebook. That project taught me the core workflow of data preprocessing and model evaluation, and I'm ready to scale it up. I've also built a Flask application with SQLite for my Task Tracker, so I understand how to connect trained models to backend systems. I'm comfortable with Git and GitHub for version control, and I've explored TensorFlow on my own to deepen my ML foundation.
 
-I am also actively building experience in api, data preprocessing, deep learning, and I see this role as a chance to apply that work in a real team.
-
-Thank you for considering my application. I would be glad to discuss how I can contribute to ABC Tech and to share specific examples from my projects that match your requirements.
+I'm aware I need to develop hands-on experience with SQL, REST APIs, and Linux in a production setting—that's precisely why this internship matters to me. I learn quickly, communicate clearly, and I'm ready to contribute from day one while growing into the full scope of your team's work.
 
 Sincerely,
+
 Ahmed Khan
 
 
 ##### APPLICATION REMINDERS #####
 Application Reminders
 =====================
-Generated: 2026-04-28 14:06:23  (today = 2026-04-28)
+Generated: 2026-04-29 01:53:42  (today = 2026-04-29)
 
 Summary by status:
   Interview Scheduled    1
 
 Per-application reminders:
 - APP-001 | ABC Tech - Junior AI Engineer Intern | Interview Scheduled
-    -> Interview on 2026-05-03 [in 5d].
+    -> Interview on 2026-05-03 [in 4d].
     -> Next action: Revise Python and ML basics; prepare project walkthrough

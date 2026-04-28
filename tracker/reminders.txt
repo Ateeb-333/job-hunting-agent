@@ -1,11 +1,11 @@
 Application Reminders
 =====================
-Generated: 2026-04-28 14:06:23  (today = 2026-04-28)
+Generated: 2026-04-29 01:53:42  (today = 2026-04-29)
 
 Summary by status:
   Interview Scheduled    1
 
 Per-application reminders:
 - APP-001 | ABC Tech - Junior AI Engineer Intern | Interview Scheduled
-    -> Interview on 2026-05-03 [in 5d].
+    -> Interview on 2026-05-03 [in 4d].
     -> Next action: Revise Python and ML basics; prepare project walkthrough

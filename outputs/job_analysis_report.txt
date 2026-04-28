@@ -1,12 +1,13 @@
 Job Analysis Report
 ===================
-Generated: 2026-04-28 14:06:23
+Generated: 2026-04-29 01:53:20
 
 Job posters analyzed: 1
   - sample_job_poster.txt
 
-Skills / keywords detected (26):
+Skills / keywords detected (28):
   - api
+  - collaboration
   - communication
   - css
   - data preprocessing
@@ -18,6 +19,7 @@ Skills / keywords detected (26):
   - html
   - jupyter
   - linux
+  - llm
   - machine learning
   - numpy
   - oop
@@ -32,3 +34,7 @@ Skills / keywords detected (26):
   - streamlit
   - tensorflow
   - version control
+
+Other notable terms in the JD (not in the agent's known skill list):
+  ? Junior AI Engineer
+  (consider whether any of these are skills you should highlight)

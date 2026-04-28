@@ -15,3 +15,17 @@ Thumbs.db
 
 # Notes: outputs/ and tracker/ are intentionally NOT ignored —
 # they are required deliverables per the lab specification.
+
+# Local zip archives / extracted snapshots (not part of the project)
+job-hunting-agent.zip
+/job-hunting-agent/
+
+# Tracker auto-backup file (regenerated on every write)
+tracker/applications.csv.bak
+
+# Status history log is local-state, not a deliverable
+tracker/status_history.log
+
+# Local secrets — NEVER commit your API key
+.env
+.streamlit/secrets.toml

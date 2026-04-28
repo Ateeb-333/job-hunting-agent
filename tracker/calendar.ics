@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//CareerPrep//Job-Hunting Agent//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:APP-001-interview@careerprep
+DTSTAMP:20260428T205342Z
+DTSTART:20260503T100000
+DTEND:20260503T110000
+SUMMARY:Interview: ABC Tech — Junior AI Engineer Intern
+DESCRIPTION:Application APP-001\nNext action: Revise Python and ML basics\; prepare project walkthrough
+END:VEVENT
+BEGIN:VEVENT
+UID:APP-001-followup@careerprep
+DTSTAMP:20260428T205342Z
+DTSTART:20260506T090000
+DTEND:20260506T091500
+SUMMARY:Follow up: ABC Tech — Junior AI Engineer Intern
+DESCRIPTION:Application APP-001: send a follow-up note.
+END:VEVENT
+END:VCALENDAR

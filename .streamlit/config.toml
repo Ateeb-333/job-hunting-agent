@@ -1,0 +1,20 @@
+# Streamlit configuration shipped with the repo.
+# Documentation: https://docs.streamlit.io/library/advanced-features/configuration
+
+[theme]
+base = "light"
+primaryColor = "#0ea5e9"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f1f5f9"
+textColor = "#0f172a"
+
+[server]
+# Sensible defaults for both local and Streamlit Cloud runs.
+maxUploadSize = 10            # MB — agent enforces a 5 MB hard cap server-side
+enableXsrfProtection = true
+
+[browser]
+gatherUsageStats = false      # don't ping Streamlit telemetry on every cold start
+
+[client]
+showErrorDetails = false      # show user-friendly errors to public visitors

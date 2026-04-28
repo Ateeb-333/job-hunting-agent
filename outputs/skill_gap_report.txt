@@ -1,8 +1,8 @@
 Skill Gap Report
 ================
-Generated: 2026-04-28 14:06:23
+Generated: 2026-04-29 01:53:20
 
-Match score: 61.54%  (16 of 26 job skills found in resume)
+Match score: 57.14%  (16 of 28 job skills found in resume)
 
 Matched skills (16):
   + communication
@@ -22,20 +22,27 @@ Matched skills (16):
   + tensorflow
   + version control
 
-Missing skills (10):
+Missing skills (12):
   - api
+  - collaboration
   - data preprocessing
   - deep learning
   - etl
   - linux
+  - llm
   - prompt engineering
   - pytorch
   - rest
   - sql
   - streamlit
 
-Resume-only skills (3):
+Resume-only skills (8):
   (skills you have that this JD didn't ask for — keep them, they may matter for other roles)
+  . algorithms
   . c++
+  . data structures
   . database
   . java
+  . sqlite
+  . teamwork
+  . vs code

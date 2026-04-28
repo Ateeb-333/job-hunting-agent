@@ -1,70 +1,40 @@
 Interview Questions
 ===================
-Generated: 2026-04-28 14:06:23
+Generated: 2026-04-29 01:53:27
+Mode: LLM-tailored
 
-A. Technical questions (derived from the job posters):
-  - Walk me through a project where you used api. What trade-offs did you make?
-  - What's a common pitfall with api that you've personally hit?
-  - Walk me through a project where you used communication. What trade-offs did you make?
-  - What's a common pitfall with communication that you've personally hit?
-  - Walk me through a project where you used css. What trade-offs did you make?
-  - What's a common pitfall with css that you've personally hit?
-  - Walk me through a project where you used data preprocessing. What trade-offs did you make?
-  - What's a common pitfall with data preprocessing that you've personally hit?
-  - Walk me through a project where you used deep learning. What trade-offs did you make?
-  - What's a common pitfall with deep learning that you've personally hit?
-  - Walk me through a project where you used etl. What trade-offs did you make?
-  - What's a common pitfall with etl that you've personally hit?
-  - Walk me through a project where you used flask. What trade-offs did you make?
-  - What's a common pitfall with flask that you've personally hit?
-  - Walk me through a project where you used git. What trade-offs did you make?
-  - What's a common pitfall with git that you've personally hit?
-  - Walk me through a project where you used github. What trade-offs did you make?
-  - What's a common pitfall with github that you've personally hit?
-  - Walk me through a project where you used html. What trade-offs did you make?
-  - What's a common pitfall with html that you've personally hit?
-  - Walk me through a project where you used jupyter. What trade-offs did you make?
-  - What's a common pitfall with jupyter that you've personally hit?
-  - Walk me through a project where you used linux. What trade-offs did you make?
-  - What's a common pitfall with linux that you've personally hit?
-  - Walk me through a project where you used machine learning. What trade-offs did you make?
-  - What's a common pitfall with machine learning that you've personally hit?
-  - Walk me through a project where you used numpy. What trade-offs did you make?
-  - What's a common pitfall with numpy that you've personally hit?
-  - Walk me through a project where you used oop. What trade-offs did you make?
-  - What's a common pitfall with oop that you've personally hit?
-  - Walk me through a project where you used pandas. What trade-offs did you make?
-  - What's a common pitfall with pandas that you've personally hit?
-  - Walk me through a project where you used problem solving. What trade-offs did you make?
-  - What's a common pitfall with problem solving that you've personally hit?
-  - Walk me through a project where you used prompt engineering. What trade-offs did you make?
-  - What's a common pitfall with prompt engineering that you've personally hit?
-  - Walk me through a project where you used python. What trade-offs did you make?
-  - What's a common pitfall with python that you've personally hit?
-  - Walk me through a project where you used pytorch. What trade-offs did you make?
-  - What's a common pitfall with pytorch that you've personally hit?
-  - Walk me through a project where you used rest. What trade-offs did you make?
-  - What's a common pitfall with rest that you've personally hit?
-  - Walk me through a project where you used scikit-learn. What trade-offs did you make?
-  - What's a common pitfall with scikit-learn that you've personally hit?
-  - Walk me through a project where you used sql. What trade-offs did you make?
-  - What's a common pitfall with sql that you've personally hit?
-  - Walk me through a project where you used streamlit. What trade-offs did you make?
-  - What's a common pitfall with streamlit that you've personally hit?
-  - Walk me through a project where you used tensorflow. What trade-offs did you make?
-  - What's a common pitfall with tensorflow that you've personally hit?
-  - Walk me through a project where you used version control. What trade-offs did you make?
-  - What's a common pitfall with version control that you've personally hit?
+A. Technical questions (LLM-picked, tailored to your resume + the JD):
 
-B. HR / behavioral questions (standard set):
-  - Tell me about yourself.
-  - Why this role / why this company?
-  - Walk me through your strongest project end-to-end.
-  - Tell me about a time you disagreed with a teammate. What did you do?
-  - Tell me about a time you failed and what you learned.
-  - What's a weakness you're actively working on?
-  - Where do you want to be in 2-3 years?
-  - Why should we pick you over other candidates?
+1. Walk me through your Student Performance Predictor project. What preprocessing steps did you take on those 500 records, and if you had to handle a dataset with 10x more rows and missing values in 40% of a column, how would your approach change?
+   **What I'd watch for:** Specific mention of pandas methods (fillna, dropna, imputation strategies), awareness of scalability trade-offs, and whether they'd actually test their approach.
+
+2. In your Task Tracker app, you used SQLite. Describe a query you wrote—what did it do? Now imagine you need to fetch all tasks for a user along with their category names from a separate table, and the query is slow. Walk me through how you'd debug and optimize it.
+
+3. You followed a TensorFlow tutorial for the Image Classifier. What did you actually learn about *why* CNNs work for images, versus just running the code? If I asked you to switch to PyTorch tomorrow, what would be genuinely hard for you?
+   **What I'd watch for:** Honest answer about depth vs. tutorial-following; willingness to admit gaps; understanding of convolution concepts, not just API calls.
+
+4. Your GitHub shows feature-branch workflow on the Task Tracker. Describe a merge conflict you've actually hit—what caused it, and how did you resolve it? If not, walk me through how you'd handle one.
+
+5. You've taken a Machine Learning course. In your Student Performance Predictor, how did you decide whether to use linear regression versus another model? What metrics did you use to evaluate it, and did you do any train/test split validation?
+
+6. The role involves REST API integration with trained models. You've built Flask apps—have you ever *called* an external API from Python (e.g., using requests library) or integrated a model endpoint? If not, talk through how you'd approach it.
+
+7. Tell me about a time you had to debug a Python script that wasn't working. What tools or techniques did you use? How comfortable are you with Linux command line for tasks like checking logs or running scripts in the background?
+
+8. You listed "Communication" and "Teamwork" as soft skills. Give me a concrete example from a group project or coursework where you had to explain a technical decision to someone less familiar with the topic, or where you disagreed with a teammate's approach.
+
+
+B. HR / behavioural questions (LLM-tailored to this role):
+
+1. Walk me through your Student Performance Predictor project. What specific data quality issues did you encounter during preprocessing, and how did you decide which approach to use to handle them?
+
+2. In your Task Tracker app, you used a feature-branch workflow on Git. Describe a situation where your approach to branching or merging didn't work as expected, and what you learned from it.
+
+3. Tell me about your self-learning experience with TensorFlow and the image classifier. What made you choose TensorFlow over PyTorch, and how did you validate that your model was actually working correctly?
+
+4. Imagine you've preprocessed a dataset and trained a model that performs well in your notebook, but when integrated into a Flask API, predictions are inconsistent. Walk me through how you'd debug this issue.
+
+5. You've taken both Machine Learning and Artificial Intelligence courses. Give me an example of a concept from one of these classes that surprised you or challenged your initial understanding, and how you worked through it.
 
 C. Questions inspired by your KB / course material:
   [Topic] Tell Me About Yourself
