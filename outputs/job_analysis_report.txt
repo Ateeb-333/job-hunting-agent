@@ -1,0 +1,34 @@
+Job Analysis Report
+===================
+Generated: 2026-04-28 14:06:23
+
+Job posters analyzed: 1
+  - sample_job_poster.txt
+
+Skills / keywords detected (26):
+  - api
+  - communication
+  - css
+  - data preprocessing
+  - deep learning
+  - etl
+  - flask
+  - git
+  - github
+  - html
+  - jupyter
+  - linux
+  - machine learning
+  - numpy
+  - oop
+  - pandas
+  - problem solving
+  - prompt engineering
+  - python
+  - pytorch
+  - rest
+  - scikit-learn
+  - sql
+  - streamlit
+  - tensorflow
+  - version control

@@ -1,0 +1,59 @@
+Interview Preparation Notes - Course KB
+
+Topic: Tell Me About Yourself
+- Keep it under 90 seconds.
+- Structure: Present (who you are, what you study) -> Past (key projects, achievements) -> Future (why this role).
+- End with a question or hook that invites follow-up.
+
+Topic: Behavioral Questions (STAR method)
+- Situation: set the context briefly.
+- Task: describe what you needed to accomplish.
+- Action: explain the steps you took, focus on YOUR contribution.
+- Result: share the outcome, ideally with a metric or measurable impact.
+
+Topic: Technical Fundamentals - Python
+- Understand difference between list, tuple, set, dict.
+- Know how to use list comprehensions and generators.
+- Be ready to explain OOP concepts: class, object, inheritance, polymorphism.
+- Practice reading and explaining code, not just writing it.
+
+Topic: Machine Learning Basics
+- Difference between supervised, unsupervised, and reinforcement learning.
+- Train/validation/test split and why it matters.
+- Common metrics: accuracy, precision, recall, F1, RMSE.
+- Overfitting vs underfitting and how to address each.
+
+Topic: Data Preprocessing
+- Handling missing values: imputation strategies and trade-offs.
+- Categorical encoding: one-hot vs label encoding.
+- Feature scaling: standardization vs normalization.
+- Train/test leakage: never fit scalers on the full dataset.
+
+Topic: SQL and Databases
+- Basic queries: SELECT, JOIN, GROUP BY, HAVING.
+- Indexes and when they help vs hurt.
+- Difference between SQL and NoSQL databases.
+- Transactions and ACID properties at a high level.
+
+Topic: Git and GitHub Workflow
+- Difference between git fetch, git pull, and git push.
+- How to resolve a merge conflict.
+- Why feature branches and pull requests matter.
+- Writing good commit messages: imperative mood, why over what.
+
+Topic: Project Discussion Tips
+- Be ready to explain trade-offs you made and why.
+- Know your project's architecture diagram by heart.
+- Prepare for "what would you do differently next time?"
+- Have one technical deep-dive ready per project.
+
+Topic: Job Fair and Networking
+- Prepare a 30-second elevator pitch.
+- Bring printed resumes and a notebook for recruiter notes.
+- Ask one thoughtful question about the company's tech stack or team.
+- Follow up within 48 hours via LinkedIn or email.
+
+Topic: Common Weakness Answers
+- Pick a real weakness, not a humble brag.
+- Show concrete steps you are taking to improve.
+- Avoid weaknesses that are core requirements of the role.

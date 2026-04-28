@@ -1,0 +1,13 @@
+Resume Quality Score
+====================
+Generated: 2026-04-28 14:06:23
+
+Overall: 74.9 / 100
+
+Breakdown:
+  JD alignment            24.6 / 40    16/26 JD skills present
+  Skill breadth             15 / 15    19 distinct skills detected
+  Projects section          15 / 15    3 project(s) found
+  Quantified bullets       1.7 / 10    3/18 bullets contain numbers
+  Contact + GitHub          10 / 10    10/10 (email + github.com link expected)
+  Length sanity            8.6 / 10    172 words (too short — flesh out projects)

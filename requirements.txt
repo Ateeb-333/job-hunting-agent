@@ -1,0 +1,4 @@
+# Core agent runs on Python 3.9+ standard library only.
+# Optional dependencies for unique features (Phase 6):
+
+pypdf>=4.0          # PDF reading for input_jobs/, input_resumes/, input_kb/

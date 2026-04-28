@@ -1,0 +1,31 @@
+Job Title: Junior AI Engineer Intern
+Company: ABC Tech
+Location: Remote / Lahore
+Type: Internship (3 months)
+
+About the Role:
+We are looking for a Junior AI Engineer Intern to join our growing data and ML team. You will work alongside senior engineers on real client projects involving data preprocessing, model training, and API integration. This is a hands-on opportunity to apply academic knowledge in a production environment.
+
+Responsibilities:
+- Build and maintain Python scripts for data preprocessing and ETL pipelines.
+- Assist in training and evaluating machine learning models using pandas, numpy, and scikit-learn.
+- Integrate trained models with REST APIs using Flask.
+- Use Git and GitHub for version control and collaboration.
+- Document code, experiments, and findings in Jupyter notebooks.
+- Participate in code reviews and team standups.
+
+Required Skills:
+- Strong Python programming fundamentals (OOP, error handling).
+- Familiarity with machine learning concepts and at least one project using pandas or numpy.
+- Working knowledge of SQL and relational databases.
+- Comfortable with Git, GitHub, and basic Linux commands.
+- Good communication and problem solving skills.
+
+Nice to Have:
+- Experience with deep learning frameworks (PyTorch, TensorFlow).
+- Exposure to prompt engineering or LLM APIs.
+- Familiarity with HTML/CSS or Streamlit for building demos.
+
+Education: BS Computer Science / Software Engineering / related field, 3rd or 4th year.
+
+How to Apply: Send your resume and a short cover note to careers@abctech.example.

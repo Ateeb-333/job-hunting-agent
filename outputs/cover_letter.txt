@@ -1,0 +1,12 @@
+Dear Hiring Team at ABC Tech,
+
+I am writing to apply for the Junior AI Engineer Intern position. I am a final-year computer science student with hands-on experience in the areas you describe, and I would welcome the chance to contribute to ABC Tech.
+
+My most directly relevant strengths include communication, css, flask, git, and github. I have applied these in academic and self-directed projects — happy to walk through the code and the trade-offs in an interview.
+
+I am also actively building experience in api, data preprocessing, deep learning, and I see this role as a chance to apply that work in a real team.
+
+Thank you for considering my application. I would be glad to discuss how I can contribute to ABC Tech and to share specific examples from my projects that match your requirements.
+
+Sincerely,
+Ahmed Khan

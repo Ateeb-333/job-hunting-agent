@@ -1,0 +1,302 @@
+CareerPrep Job-Hunting Agent — Final Report
+===========================================
+Generated: 2026-04-28 14:06:23
+
+
+##### JOB ANALYSIS #####
+Job Analysis Report
+===================
+Generated: 2026-04-28 14:06:23
+
+Job posters analyzed: 1
+  - sample_job_poster.txt
+
+Skills / keywords detected (26):
+  - api
+  - communication
+  - css
+  - data preprocessing
+  - deep learning
+  - etl
+  - flask
+  - git
+  - github
+  - html
+  - jupyter
+  - linux
+  - machine learning
+  - numpy
+  - oop
+  - pandas
+  - problem solving
+  - prompt engineering
+  - python
+  - pytorch
+  - rest
+  - scikit-learn
+  - sql
+  - streamlit
+  - tensorflow
+  - version control
+
+
+##### SKILL GAP #####
+Skill Gap Report
+================
+Generated: 2026-04-28 14:06:23
+
+Match score: 61.54%  (16 of 26 job skills found in resume)
+
+Matched skills (16):
+  + communication
+  + css
+  + flask
+  + git
+  + github
+  + html
+  + jupyter
+  + machine learning
+  + numpy
+  + oop
+  + pandas
+  + problem solving
+  + python
+  + scikit-learn
+  + tensorflow
+  + version control
+
+Missing skills (10):
+  - api
+  - data preprocessing
+  - deep learning
+  - etl
+  - linux
+  - prompt engineering
+  - pytorch
+  - rest
+  - sql
+  - streamlit
+
+Resume-only skills (3):
+  (skills you have that this JD didn't ask for — keep them, they may matter for other roles)
+  . c++
+  . database
+  . java
+
+
+##### RESUME QUALITY SCORE #####
+Resume Quality Score
+====================
+Generated: 2026-04-28 14:06:23
+
+Overall: 74.9 / 100
+
+Breakdown:
+  JD alignment            24.6 / 40    16/26 JD skills present
+  Skill breadth             15 / 15    19 distinct skills detected
+  Projects section          15 / 15    3 project(s) found
+  Quantified bullets       1.7 / 10    3/18 bullets contain numbers
+  Contact + GitHub          10 / 10    10/10 (email + github.com link expected)
+  Length sanity            8.6 / 10    172 words (too short — flesh out projects)
+
+
+##### TAILORED RESUME SUGGESTIONS #####
+Tailored Resume Suggestions
+===========================
+Generated: 2026-04-28 14:06:23
+
+1) Strengthen these bullets — you already have evidence, make sure it's visible:
+  + [communication] Presented technical work to non-technical stakeholders; wrote clear README/docs.
+  + [css] Styled responsive layouts using modern CSS (flexbox, grid).
+  + [flask] Built and deployed Flask web apps with templating, sessions, and route handlers.
+  + [git] Used Git feature-branch workflow with clear commit messages and rebases.
+  + [github] Used GitHub for version control, pull requests, and code review on team projects.
+  + [html] Built HTML5 layouts with semantic markup and accessible structure.
+  + [jupyter] Documented experiments and findings in Jupyter notebooks with reproducible cells.
+  + [machine learning] Trained and evaluated ML models, reporting accuracy / precision / recall on a held-out test set.
+  + [numpy] Used numpy for vectorized numerical computation and array manipulation.
+  + [oop] Applied OOP design (encapsulation, inheritance, polymorphism) to keep code modular.
+  + [pandas] Used pandas for data cleaning, joining, and aggregation on real-world datasets.
+  + [problem solving] Broke down ambiguous problems, scoped a solution, and shipped iteratively.
+  + [python] Wrote production-quality Python (OOP, error handling, virtual envs) for your project.
+  + [scikit-learn] Used scikit-learn (pipelines, model selection, metrics) for classical ML tasks.
+  + [tensorflow] Trained models in TensorFlow / Keras and exported them for inference.
+  + [version control] Used Git/GitHub version control with branches, PRs, and code review.
+
+2) Close these gaps before applying — the JD asks for them, your resume doesn't show them:
+  - [api] Suggested bullet: Designed and consumed REST APIs; handled auth, pagination, and error responses.
+  - [data preprocessing] Suggested bullet: Built data preprocessing pipelines (missing-value imputation, encoding, scaling) avoiding train/test leakage.
+  - [deep learning] Suggested bullet: Trained neural networks (feed-forward / CNN) and tuned hyperparameters.
+  - [etl] Suggested bullet: Built ETL jobs that extracted from source systems, transformed records, and loaded warehouses.
+  - [linux] Suggested bullet: Comfortable on Linux command line: shell scripting, file permissions, processes.
+  - [prompt engineering] Suggested bullet: Drafted, tested, and iterated on LLM prompts; measured output quality across versions.
+  - [pytorch] Suggested bullet: Built and trained PyTorch models with custom datasets and training loops.
+  - [rest] Suggested bullet: Designed and consumed REST endpoints; followed status-code and resource conventions.
+  - [sql] Suggested bullet: Wrote SQL (JOINs, GROUP BY, window functions) against a relational database.
+  - [streamlit] Suggested bullet: Shipped interactive Streamlit apps to demo data/ML projects.
+
+3) General resume hygiene:
+  . Lead each bullet with a strong verb (Built, Shipped, Analyzed, Reduced).
+  . Quantify outcomes where possible (rows processed, accuracy %, time saved).
+  . Match terminology to the JD: if the JD says 'REST API', don't write 'web service'.
+  . Keep it to one page; cut anything older than 2 years that isn't load-bearing.
+  . Link to GitHub for every project bullet that has source code.
+
+
+##### PROJECT-TO-JD MAPPING #####
+Project-to-JD Mapping
+=====================
+Generated: 2026-04-28 14:06:23
+
+Found 3 project(s). Showing JD coverage per project:
+
+- Student Performance Predictor (Course Project)
+    JD coverage: 15.4%  (4 of 26 JD skills)
+    Mapped skills: github, jupyter, pandas, scikit-learn
+
+- Task Tracker Web App
+    JD coverage: 19.2%  (5 of 26 JD skills)
+    Mapped skills: css, flask, git, html, version control
+
+- Image Classifier (Self-Learning)
+    JD coverage: 3.8%  (1 of 26 JD skills)
+    Mapped skills: tensorflow
+
+
+
+##### INTERVIEW QUESTIONS #####
+Interview Questions
+===================
+Generated: 2026-04-28 14:06:23
+
+A. Technical questions (derived from the job posters):
+  - Walk me through a project where you used api. What trade-offs did you make?
+  - What's a common pitfall with api that you've personally hit?
+  - Walk me through a project where you used communication. What trade-offs did you make?
+  - What's a common pitfall with communication that you've personally hit?
+  - Walk me through a project where you used css. What trade-offs did you make?
+  - What's a common pitfall with css that you've personally hit?
+  - Walk me through a project where you used data preprocessing. What trade-offs did you make?
+  - What's a common pitfall with data preprocessing that you've personally hit?
+  - Walk me through a project where you used deep learning. What trade-offs did you make?
+  - What's a common pitfall with deep learning that you've personally hit?
+  - Walk me through a project where you used etl. What trade-offs did you make?
+  - What's a common pitfall with etl that you've personally hit?
+  - Walk me through a project where you used flask. What trade-offs did you make?
+  - What's a common pitfall with flask that you've personally hit?
+  - Walk me through a project where you used git. What trade-offs did you make?
+  - What's a common pitfall with git that you've personally hit?
+  - Walk me through a project where you used github. What trade-offs did you make?
+  - What's a common pitfall with github that you've personally hit?
+  - Walk me through a project where you used html. What trade-offs did you make?
+  - What's a common pitfall with html that you've personally hit?
+  - Walk me through a project where you used jupyter. What trade-offs did you make?
+  - What's a common pitfall with jupyter that you've personally hit?
+  - Walk me through a project where you used linux. What trade-offs did you make?
+  - What's a common pitfall with linux that you've personally hit?
+  - Walk me through a project where you used machine learning. What trade-offs did you make?
+  - What's a common pitfall with machine learning that you've personally hit?
+  - Walk me through a project where you used numpy. What trade-offs did you make?
+  - What's a common pitfall with numpy that you've personally hit?
+  - Walk me through a project where you used oop. What trade-offs did you make?
+  - What's a common pitfall with oop that you've personally hit?
+  - Walk me through a project where you used pandas. What trade-offs did you make?
+  - What's a common pitfall with pandas that you've personally hit?
+  - Walk me through a project where you used problem solving. What trade-offs did you make?
+  - What's a common pitfall with problem solving that you've personally hit?
+  - Walk me through a project where you used prompt engineering. What trade-offs did you make?
+  - What's a common pitfall with prompt engineering that you've personally hit?
+  - Walk me through a project where you used python. What trade-offs did you make?
+  - What's a common pitfall with python that you've personally hit?
+  - Walk me through a project where you used pytorch. What trade-offs did you make?
+  - What's a common pitfall with pytorch that you've personally hit?
+  - Walk me through a project where you used rest. What trade-offs did you make?
+  - What's a common pitfall with rest that you've personally hit?
+  - Walk me through a project where you used scikit-learn. What trade-offs did you make?
+  - What's a common pitfall with scikit-learn that you've personally hit?
+  - Walk me through a project where you used sql. What trade-offs did you make?
+  - What's a common pitfall with sql that you've personally hit?
+  - Walk me through a project where you used streamlit. What trade-offs did you make?
+  - What's a common pitfall with streamlit that you've personally hit?
+  - Walk me through a project where you used tensorflow. What trade-offs did you make?
+  - What's a common pitfall with tensorflow that you've personally hit?
+  - Walk me through a project where you used version control. What trade-offs did you make?
+  - What's a common pitfall with version control that you've personally hit?
+
+B. HR / behavioral questions (standard set):
+  - Tell me about yourself.
+  - Why this role / why this company?
+  - Walk me through your strongest project end-to-end.
+  - Tell me about a time you disagreed with a teammate. What did you do?
+  - Tell me about a time you failed and what you learned.
+  - What's a weakness you're actively working on?
+  - Where do you want to be in 2-3 years?
+  - Why should we pick you over other candidates?
+
+C. Questions inspired by your KB / course material:
+  [Topic] Tell Me About Yourself
+    - How would you explain 'Tell Me About Yourself' to a non-technical interviewer?
+    - In an interview, how would you respond to: "Keep it under 90 seconds."?
+    - In an interview, how would you respond to: "Structure: Present (who you are, what you study) -> Past (key projects, achievements) -> Future (why this r..."?
+    - In an interview, how would you respond to: "End with a question or hook that invites follow-up."?
+  [Topic] Behavioral Questions (STAR method)
+    - How would you explain 'Behavioral Questions (STAR method)' to a non-technical interviewer?
+    - In an interview, how would you respond to: "Situation: set the context briefly."?
+    - In an interview, how would you respond to: "Task: describe what you needed to accomplish."?
+    - In an interview, how would you respond to: "Action: explain the steps you took, focus on YOUR contribution."?
+    - In an interview, how would you respond to: "Result: share the outcome, ideally with a metric or measurable impact."?
+  [Topic] Technical Fundamentals - Python
+    - How would you explain 'Technical Fundamentals - Python' to a non-technical interviewer?
+    - In an interview, how would you respond to: "Understand difference between list, tuple, set, dict."?
+    - In an interview, how would you respond to: "Know how to use list comprehensions and generators."?
+    - In an interview, how would you respond to: "Be ready to explain OOP concepts: class, object, inheritance, polymorphism."?
+    - In an interview, how would you respond to: "Practice reading and explaining code, not just writing it."?
+  [Topic] Machine Learning Basics
+    - How would you explain 'Machine Learning Basics' to a non-technical interviewer?
+    - In an interview, how would you respond to: "Difference between supervised, unsupervised, and reinforcement learning."?
+    - In an interview, how would you respond to: "Train/validation/test split and why it matters."?
+    - In an interview, how would you respond to: "Common metrics: accuracy, precision, recall, F1, RMSE."?
+    - In an interview, how would you respond to: "Overfitting vs underfitting and how to address each."?
+  [Topic] Data Preprocessing
+    - How would you explain 'Data Preprocessing' to a non-technical interviewer?
+    - In an interview, how would you respond to: "Handling missing values: imputation strategies and trade-offs."?
+    - In an interview, how would you respond to: "Categorical encoding: one-hot vs label encoding."?
+    - In an interview, how would you respond to: "Feature scaling: standardization vs normalization."?
+    - In an interview, how would you respond to: "Train/test leakage: never fit scalers on the full dataset."?
+  [Topic] SQL and Databases
+    - How would you explain 'SQL and Databases' to a non-technical interviewer?
+
+D. Questions YOU should ask the interviewer:
+  - What does success look like for this role in the first 90 days?
+  - What's the team's tech stack and how does code get reviewed?
+  - What's the biggest technical challenge the team is facing right now?
+  - How does the team support an intern's learning and growth?
+
+
+##### COVER LETTER DRAFT #####
+Dear Hiring Team at ABC Tech,
+
+I am writing to apply for the Junior AI Engineer Intern position. I am a final-year computer science student with hands-on experience in the areas you describe, and I would welcome the chance to contribute to ABC Tech.
+
+My most directly relevant strengths include communication, css, flask, git, and github. I have applied these in academic and self-directed projects — happy to walk through the code and the trade-offs in an interview.
+
+I am also actively building experience in api, data preprocessing, deep learning, and I see this role as a chance to apply that work in a real team.
+
+Thank you for considering my application. I would be glad to discuss how I can contribute to ABC Tech and to share specific examples from my projects that match your requirements.
+
+Sincerely,
+Ahmed Khan
+
+
+##### APPLICATION REMINDERS #####
+Application Reminders
+=====================
+Generated: 2026-04-28 14:06:23  (today = 2026-04-28)
+
+Summary by status:
+  Interview Scheduled    1
+
+Per-application reminders:
+- APP-001 | ABC Tech - Junior AI Engineer Intern | Interview Scheduled
+    -> Interview on 2026-05-03 [in 5d].
+    -> Next action: Revise Python and ML basics; prepare project walkthrough

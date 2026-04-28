@@ -1,0 +1,40 @@
+Tailored Resume Suggestions
+===========================
+Generated: 2026-04-28 14:06:23
+
+1) Strengthen these bullets — you already have evidence, make sure it's visible:
+  + [communication] Presented technical work to non-technical stakeholders; wrote clear README/docs.
+  + [css] Styled responsive layouts using modern CSS (flexbox, grid).
+  + [flask] Built and deployed Flask web apps with templating, sessions, and route handlers.
+  + [git] Used Git feature-branch workflow with clear commit messages and rebases.
+  + [github] Used GitHub for version control, pull requests, and code review on team projects.
+  + [html] Built HTML5 layouts with semantic markup and accessible structure.
+  + [jupyter] Documented experiments and findings in Jupyter notebooks with reproducible cells.
+  + [machine learning] Trained and evaluated ML models, reporting accuracy / precision / recall on a held-out test set.
+  + [numpy] Used numpy for vectorized numerical computation and array manipulation.
+  + [oop] Applied OOP design (encapsulation, inheritance, polymorphism) to keep code modular.
+  + [pandas] Used pandas for data cleaning, joining, and aggregation on real-world datasets.
+  + [problem solving] Broke down ambiguous problems, scoped a solution, and shipped iteratively.
+  + [python] Wrote production-quality Python (OOP, error handling, virtual envs) for your project.
+  + [scikit-learn] Used scikit-learn (pipelines, model selection, metrics) for classical ML tasks.
+  + [tensorflow] Trained models in TensorFlow / Keras and exported them for inference.
+  + [version control] Used Git/GitHub version control with branches, PRs, and code review.
+
+2) Close these gaps before applying — the JD asks for them, your resume doesn't show them:
+  - [api] Suggested bullet: Designed and consumed REST APIs; handled auth, pagination, and error responses.
+  - [data preprocessing] Suggested bullet: Built data preprocessing pipelines (missing-value imputation, encoding, scaling) avoiding train/test leakage.
+  - [deep learning] Suggested bullet: Trained neural networks (feed-forward / CNN) and tuned hyperparameters.
+  - [etl] Suggested bullet: Built ETL jobs that extracted from source systems, transformed records, and loaded warehouses.
+  - [linux] Suggested bullet: Comfortable on Linux command line: shell scripting, file permissions, processes.
+  - [prompt engineering] Suggested bullet: Drafted, tested, and iterated on LLM prompts; measured output quality across versions.
+  - [pytorch] Suggested bullet: Built and trained PyTorch models with custom datasets and training loops.
+  - [rest] Suggested bullet: Designed and consumed REST endpoints; followed status-code and resource conventions.
+  - [sql] Suggested bullet: Wrote SQL (JOINs, GROUP BY, window functions) against a relational database.
+  - [streamlit] Suggested bullet: Shipped interactive Streamlit apps to demo data/ML projects.
+
+3) General resume hygiene:
+  . Lead each bullet with a strong verb (Built, Shipped, Analyzed, Reduced).
+  . Quantify outcomes where possible (rows processed, accuracy %, time saved).
+  . Match terminology to the JD: if the JD says 'REST API', don't write 'web service'.
+  . Keep it to one page; cut anything older than 2 years that isn't load-bearing.
+  . Link to GitHub for every project bullet that has source code.

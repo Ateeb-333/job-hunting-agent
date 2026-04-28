@@ -1,0 +1,18 @@
+Project-to-JD Mapping
+=====================
+Generated: 2026-04-28 14:06:23
+
+Found 3 project(s). Showing JD coverage per project:
+
+- Student Performance Predictor (Course Project)
+    JD coverage: 15.4%  (4 of 26 JD skills)
+    Mapped skills: github, jupyter, pandas, scikit-learn
+
+- Task Tracker Web App
+    JD coverage: 19.2%  (5 of 26 JD skills)
+    Mapped skills: css, flask, git, html, version control
+
+- Image Classifier (Self-Learning)
+    JD coverage: 3.8%  (1 of 26 JD skills)
+    Mapped skills: tensorflow
+

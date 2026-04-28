@@ -1,0 +1,96 @@
+{
+  "generated_at": "2026-04-28T14:06:23",
+  "inputs": {
+    "job_files": [
+      "sample_job_poster.txt"
+    ],
+    "kb_files": [
+      "sample_kb.txt"
+    ],
+    "resume_files": [
+      "sample_resume.txt"
+    ]
+  },
+  "job_skills": [
+    "python",
+    "machine learning",
+    "data preprocessing",
+    "github",
+    "git",
+    "api",
+    "prompt engineering",
+    "sql",
+    "communication",
+    "problem solving",
+    "oop",
+    "jupyter",
+    "pandas",
+    "numpy",
+    "deep learning",
+    "html",
+    "css",
+    "flask",
+    "streamlit",
+    "tensorflow",
+    "pytorch",
+    "scikit-learn",
+    "rest",
+    "etl",
+    "linux",
+    "version control"
+  ],
+  "match_score": 61.54,
+  "matched": [
+    "communication",
+    "css",
+    "flask",
+    "git",
+    "github",
+    "html",
+    "jupyter",
+    "machine learning",
+    "numpy",
+    "oop",
+    "pandas",
+    "problem solving",
+    "python",
+    "scikit-learn",
+    "tensorflow",
+    "version control"
+  ],
+  "missing": [
+    "api",
+    "data preprocessing",
+    "deep learning",
+    "etl",
+    "linux",
+    "prompt engineering",
+    "pytorch",
+    "rest",
+    "sql",
+    "streamlit"
+  ],
+  "resume_quality_score": 74.9,
+  "resume_skills": [
+    "python",
+    "machine learning",
+    "github",
+    "git",
+    "communication",
+    "problem solving",
+    "oop",
+    "database",
+    "jupyter",
+    "pandas",
+    "numpy",
+    "html",
+    "css",
+    "flask",
+    "tensorflow",
+    "scikit-learn",
+    "java",
+    "c++",
+    "version control"
+  ],
+  "tracked_applications": 1
+}

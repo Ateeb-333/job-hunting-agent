@@ -1,0 +1,37 @@
+Name: Ahmed Khan
+Email: ahmed.khan@example.com
+Phone: +92-300-0000000
+GitHub: github.com/ahmedkhan-example
+
+Education:
+- BS Computer Science, FAST-NUCES Lahore, 2022 - 2026 (CGPA 3.4)
+
+Skills:
+- Programming: Python, C++, Java basics, OOP
+- Data: pandas, numpy, jupyter notebooks
+- Web: HTML, CSS, basic Flask
+- Tools: Git, GitHub, VS Code
+- Soft skills: Communication, problem solving, teamwork
+
+Projects:
+1. Student Performance Predictor (Course Project)
+   - Built a regression model using pandas and scikit-learn to predict student GPA.
+   - Cleaned and preprocessed a dataset of 500 records.
+   - Documented in a Jupyter notebook on GitHub.
+
+2. Task Tracker Web App
+   - Flask application with HTML/CSS frontend.
+   - SQLite database for task storage.
+   - Used Git for version control with feature-branch workflow.
+
+3. Image Classifier (Self-Learning)
+   - Followed a tutorial to build a CNN with TensorFlow.
+   - Trained on a small image dataset, documented results.
+
+Coursework:
+- Data Structures, Algorithms, Database Systems, Operating Systems,
+  Machine Learning, Artificial Intelligence, Web Engineering.
+
+Activities:
+- Member, FAST AI Society.
+- Volunteered at university job fair, 2025.

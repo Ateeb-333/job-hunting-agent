@@ -1,0 +1,106 @@
+Interview Questions
+===================
+Generated: 2026-04-28 14:06:23
+
+A. Technical questions (derived from the job posters):
+  - Walk me through a project where you used api. What trade-offs did you make?
+  - What's a common pitfall with api that you've personally hit?
+  - Walk me through a project where you used communication. What trade-offs did you make?
+  - What's a common pitfall with communication that you've personally hit?
+  - Walk me through a project where you used css. What trade-offs did you make?
+  - What's a common pitfall with css that you've personally hit?
+  - Walk me through a project where you used data preprocessing. What trade-offs did you make?
+  - What's a common pitfall with data preprocessing that you've personally hit?
+  - Walk me through a project where you used deep learning. What trade-offs did you make?
+  - What's a common pitfall with deep learning that you've personally hit?
+  - Walk me through a project where you used etl. What trade-offs did you make?
+  - What's a common pitfall with etl that you've personally hit?
+  - Walk me through a project where you used flask. What trade-offs did you make?
+  - What's a common pitfall with flask that you've personally hit?
+  - Walk me through a project where you used git. What trade-offs did you make?
+  - What's a common pitfall with git that you've personally hit?
+  - Walk me through a project where you used github. What trade-offs did you make?
+  - What's a common pitfall with github that you've personally hit?
+  - Walk me through a project where you used html. What trade-offs did you make?
+  - What's a common pitfall with html that you've personally hit?
+  - Walk me through a project where you used jupyter. What trade-offs did you make?
+  - What's a common pitfall with jupyter that you've personally hit?
+  - Walk me through a project where you used linux. What trade-offs did you make?
+  - What's a common pitfall with linux that you've personally hit?
+  - Walk me through a project where you used machine learning. What trade-offs did you make?
+  - What's a common pitfall with machine learning that you've personally hit?
+  - Walk me through a project where you used numpy. What trade-offs did you make?
+  - What's a common pitfall with numpy that you've personally hit?
+  - Walk me through a project where you used oop. What trade-offs did you make?
+  - What's a common pitfall with oop that you've personally hit?
+  - Walk me through a project where you used pandas. What trade-offs did you make?
+  - What's a common pitfall with pandas that you've personally hit?
+  - Walk me through a project where you used problem solving. What trade-offs did you make?
+  - What's a common pitfall with problem solving that you've personally hit?
+  - Walk me through a project where you used prompt engineering. What trade-offs did you make?
+  - What's a common pitfall with prompt engineering that you've personally hit?
+  - Walk me through a project where you used python. What trade-offs did you make?
+  - What's a common pitfall with python that you've personally hit?
+  - Walk me through a project where you used pytorch. What trade-offs did you make?
+  - What's a common pitfall with pytorch that you've personally hit?
+  - Walk me through a project where you used rest. What trade-offs did you make?
+  - What's a common pitfall with rest that you've personally hit?
+  - Walk me through a project where you used scikit-learn. What trade-offs did you make?
+  - What's a common pitfall with scikit-learn that you've personally hit?
+  - Walk me through a project where you used sql. What trade-offs did you make?
+  - What's a common pitfall with sql that you've personally hit?
+  - Walk me through a project where you used streamlit. What trade-offs did you make?
+  - What's a common pitfall with streamlit that you've personally hit?
+  - Walk me through a project where you used tensorflow. What trade-offs did you make?
+  - What's a common pitfall with tensorflow that you've personally hit?
+  - Walk me through a project where you used version control. What trade-offs did you make?
+  - What's a common pitfall with version control that you've personally hit?
+
+B. HR / behavioral questions (standard set):
+  - Tell me about yourself.
+  - Why this role / why this company?
+  - Walk me through your strongest project end-to-end.
+  - Tell me about a time you disagreed with a teammate. What did you do?
+  - Tell me about a time you failed and what you learned.
+  - What's a weakness you're actively working on?
+  - Where do you want to be in 2-3 years?
+  - Why should we pick you over other candidates?
+
+C. Questions inspired by your KB / course material:
+  [Topic] Tell Me About Yourself
+    - How would you explain 'Tell Me About Yourself' to a non-technical interviewer?
+    - In an interview, how would you respond to: "Keep it under 90 seconds."?
+    - In an interview, how would you respond to: "Structure: Present (who you are, what you study) -> Past (key projects, achievements) -> Future (why this r..."?
+    - In an interview, how would you respond to: "End with a question or hook that invites follow-up."?
+  [Topic] Behavioral Questions (STAR method)
+    - How would you explain 'Behavioral Questions (STAR method)' to a non-technical interviewer?
+    - In an interview, how would you respond to: "Situation: set the context briefly."?
+    - In an interview, how would you respond to: "Task: describe what you needed to accomplish."?
+    - In an interview, how would you respond to: "Action: explain the steps you took, focus on YOUR contribution."?
+    - In an interview, how would you respond to: "Result: share the outcome, ideally with a metric or measurable impact."?
+  [Topic] Technical Fundamentals - Python
+    - How would you explain 'Technical Fundamentals - Python' to a non-technical interviewer?
+    - In an interview, how would you respond to: "Understand difference between list, tuple, set, dict."?
+    - In an interview, how would you respond to: "Know how to use list comprehensions and generators."?
+    - In an interview, how would you respond to: "Be ready to explain OOP concepts: class, object, inheritance, polymorphism."?
+    - In an interview, how would you respond to: "Practice reading and explaining code, not just writing it."?
+  [Topic] Machine Learning Basics
+    - How would you explain 'Machine Learning Basics' to a non-technical interviewer?
+    - In an interview, how would you respond to: "Difference between supervised, unsupervised, and reinforcement learning."?
+    - In an interview, how would you respond to: "Train/validation/test split and why it matters."?
+    - In an interview, how would you respond to: "Common metrics: accuracy, precision, recall, F1, RMSE."?
+    - In an interview, how would you respond to: "Overfitting vs underfitting and how to address each."?
+  [Topic] Data Preprocessing
+    - How would you explain 'Data Preprocessing' to a non-technical interviewer?
+    - In an interview, how would you respond to: "Handling missing values: imputation strategies and trade-offs."?
+    - In an interview, how would you respond to: "Categorical encoding: one-hot vs label encoding."?
+    - In an interview, how would you respond to: "Feature scaling: standardization vs normalization."?
+    - In an interview, how would you respond to: "Train/test leakage: never fit scalers on the full dataset."?
+  [Topic] SQL and Databases
+    - How would you explain 'SQL and Databases' to a non-technical interviewer?
+
+D. Questions YOU should ask the interviewer:
+  - What does success look like for this role in the first 90 days?
+  - What's the team's tech stack and how does code get reviewed?
+  - What's the biggest technical challenge the team is facing right now?
+  - How does the team support an intern's learning and growth?
