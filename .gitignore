@@ -8,7 +8,6 @@ env/
 *.egg-info/
 
 # IDE / OS
-.vscode/
 .idea/
 .DS_Store
 Thumbs.db
@@ -26,6 +25,14 @@ tracker/applications.csv.bak
 # Status history log is local-state, not a deliverable
 tracker/status_history.log
 
+# Job-search response cache (Phase 13 — regenerated on demand)
+tracker/.search_cache.json
+
 # Local secrets — NEVER commit your API key
-.env
 .streamlit/secrets.toml
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
+config.bat
+node_modules

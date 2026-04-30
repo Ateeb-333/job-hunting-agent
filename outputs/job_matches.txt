@@ -1,0 +1,392 @@
+Job Discovery Report
+====================
+Generated: 2026-05-01 02:22:18
+
+Query: python java c++ html css
+Providers used: remotive, remoteok, arbeitnow, wwr, hn
+
+Matches found: 92
+
+1. [100.0%] Elektro- und Informationstechniker (m/w/d) Elektronik & C++ Maschinensteuerung — Krug & Priester GmbH & Co. KG
+   Arbeitnow | Balingen | Hybrid
+   matched: c++
+   https://www.arbeitnow.com/jobs/companies/krug-priester-gmbh-co-kg/elektro-und-informationstechniker-elektronik-c-maschinensteuerung-balingen-393743
+
+2. [100.0%] Backend Engineer — Paperpile
+   RemoteOK | Worldwide | Remote
+   matched: database
+   https://remoteOK.com/remote-jobs/remote-backend-engineer-paperpile-1131382
+
+3. [100.0%] Senior Back-End Engineer (Java) - Product Foundation — Ataccama
+   We Work Remotely | Worldwide | Remote
+   matched: java
+   https://weworkremotely.com/remote-jobs/ataccama-senior-back-end-engineer-java-product-foundation
+
+4. [100.0%] Devops — Mutt Data
+   We Work Remotely | Worldwide | Remote
+   matched: machine learning
+   https://weworkremotely.com/remote-jobs/mutt-data-devops
+
+5. [100.0%] DevOps Engineer — Qventus
+   We Work Remotely | Worldwide | Remote
+   matched: machine learning
+   https://weworkremotely.com/remote-jobs/qventus-devops-engineer
+
+6. [50.0%] Quatico — (unknown)
+   HN: Who is hiring | See post | Remote
+   matched: java
+   https://news.ycombinator.com/item?id=22665770
+
+7. [50.0%] Dremio | Full Stack and System Engineers | Santa Clara, CA | Onsite (once shelter-in-place ends) | https:&#x2F;&#x2F;www — (unknown)
+   HN: Who is hiring | See post | On-site
+   matched: java
+   https://news.ycombinator.com/item?id=22666036
+
+8. [50.0%] Front End Full Stack Developer — Honor Foods
+   RemoteOK | Philadelphia, PA | Remote
+   matched: java
+   https://remoteOK.com/remote-jobs/remote-front-end-full-stack-developer-honor-foods-1131370
+
+9. [33.3%] Cytora | London, United Kingdom | Full Time | ONSITE (WFH currently due to covid) | Golang, JavaScript and Python | https:&#x2F;&#x2F;cytora — (unknown)
+   HN: Who is hiring | See post | Remote
+   matched: python
+   https://news.ycombinator.com/item?id=22665902
+
+10. [12.5%] Sequoia Capital | Full Time | Platform Engineer | https:&#x2F;&#x2F;www — (unknown)
+   HN: Who is hiring | See post | Remote
+   matched: python
+   https://news.ycombinator.com/item?id=22665688
+
+11. [0.0%] Marketing Manager — Lumiform
+   Arbeitnow | Berlin | Remote
+   https://www.arbeitnow.com/jobs/companies/lumiform/marketing-manager-berlin-434729
+
+12. [0.0%] Senior Data Engineer (m/f/d) – Customer Identity Resolution — momox
+   Arbeitnow | Berlin | Hybrid
+   https://www.arbeitnow.com/jobs/companies/momox/senior-data-engineer-customer-identity-resolution-berlin-493575
+
+13. [0.0%] Data Engineer (Mid-Sen Level) - Fully Remote — SOFTGAMES
+   Arbeitnow | Berlin | Remote
+   https://www.arbeitnow.com/jobs/companies/softgames/data-engineer-mid-sen-level-fully-remote-berlin-364711
+
+14. [0.0%] Fullstack-Entwickler (m/w/d) mit Angular und Springboot Erfahrung, sowie optimal mit OSPlus Kenntnissen (Ref.Nr.: 46658) — Wavestone Germany AG
+   Arbeitnow | Münster | Remote
+   https://www.arbeitnow.com/jobs/companies/wavestone-germany-ag/fullstack-entwickler-mit-angular-und-springboot-erfahrung-sowie-optimal-mit-osplus-kenntnissen-refnr-46658-munster-257771
+
+15. [0.0%] (Senior) Teamlead Software Development — Bikeleasing-Service GmbH & Co. KG
+   Arbeitnow | Berlin | Remote
+   https://www.arbeitnow.com/jobs/companies/bikeleasing-service-gmbh-co-kg/senior-teamlead-software-development-berlin-107950
+
+16. [0.0%] (Senior) Teamlead Software Development — Bikeleasing-Service GmbH & Co. KG
+   Arbeitnow | Berlin | Remote
+   https://www.arbeitnow.com/jobs/companies/bikeleasing-service-gmbh-co-kg/senior-teamlead-software-development-berlin-48764
+
+17. [0.0%] Werkstudent (m/w/d) - IT Consulting & KI — MGRP
+   Arbeitnow | Frankfurt am Main | Hybrid
+   https://www.arbeitnow.com/jobs/companies/mgrp/werkstudent-it-consulting-ki-frankfurt-am-main-17343
+
+18. [0.0%] (Senior) UI/UX Designer (m/w/d) - App Design / fluege.de — Invia Flights Germany GmbH
+   Arbeitnow | Leipzig | Unspecified
+   https://www.arbeitnow.com/jobs/companies/invia-flights-germany-gmbh/senior-ui-ux-designer-app-design-fluegede-leipzig-386233
+
+19. [0.0%] Full Stack Developer (m/w/d) - PHP/Symfony & React — FinMent GmbH
+   Arbeitnow | Berlin | Unspecified
+   https://www.arbeitnow.com/jobs/companies/finment-gmbh/php-full-stack-developer-berlin-427616
+
+20. [0.0%] Junior Full Stack Developer (m/w/d) -  Modern PHP — FinMent GmbH
+   Arbeitnow | Berlin | Unspecified
+   https://www.arbeitnow.com/jobs/companies/finment-gmbh/junior-php-full-stack-developer-berlin-142127
+
+21. [0.0%] Duales Studium - Informatik / Wirtschaftsinformatik (m/w/d) — FinMent GmbH
+   Arbeitnow | Berlin | Unspecified
+   https://www.arbeitnow.com/jobs/companies/finment-gmbh/duales-studium-informatik-wirtschaftsinformatik-berlin-102145
+
+22. [0.0%] Fullstack Application Developer (m/w/d) — syte GmbH
+   Arbeitnow | Münster | Hybrid
+   https://www.arbeitnow.com/jobs/companies/syte-gmbh/fullstack-application-developer-munster-264870
+
+23. [0.0%] Testautomatisierer (m/w/d) — citema systems GmbH
+   Arbeitnow | Munich | Unspecified
+   https://www.arbeitnow.com/jobs/companies/citema-systems-gmbh/testautomatisierer-munich-430306
+
+24. [0.0%] Secfi | Software engineer(s) + Operations and Finance | Amsterdam, the Netherlands + San Francisco | EUR 50-150k + equity Secfi is a VC-back — (unknown)
+   HN: Who is hiring | See post | Unspecified
+   https://news.ycombinator.com/item?id=22665626
+
+25. [0.0%] The Pacific Financial Group | DevOps Engineer | REMOTE (US based) | Full Time | tpfg — (unknown)
+   HN: Who is hiring | See post | Remote
+   https://news.ycombinator.com/item?id=22665649
+
+26. [0.0%] Duo Security | Ann Arbor MI, Austin TX, Remote | Full time Duo is not slowing down its hiring during all of this — (unknown)
+   HN: Who is hiring | See post | Remote
+   https://news.ycombinator.com/item?id=22665705
+
+27. [0.0%] RepSpark | Software Developer - New Grad | Irvine, CA | Full-time | ONSITE (currently remote) | https:&#x2F;&#x2F;www — (unknown)
+   HN: Who is hiring | See post | Remote
+   https://news.ycombinator.com/item?id=22665747
+
+28. [0.0%] Sevendof | Front-End Engineer + Embedded Software Engineer + Flight Operations Manager | Trondheim, Norway | ONSITE, VISA, Full-time | https — (unknown)
+   HN: Who is hiring | See post | Remote
+   https://news.ycombinator.com/item?id=22665950
+
+29. [0.0%] Fold | San Francisco, CA; Atlanta, GA | Software Engineer | ONSITE &amp; REMOTE | Full-time | $110k-140k with equity We are a cryptocurrency — (unknown)
+   HN: Who is hiring | See post | Remote
+   https://news.ycombinator.com/item?id=22665955
+
+30. [0.0%] ChargeLab | Team Lead | Toronto, ON | ONSITE (WFH for now) | FULL-TIME ChargeLab ( https:&#x2F;&#x2F;www — (unknown)
+   HN: Who is hiring | See post | Remote
+   https://news.ycombinator.com/item?id=22665985
+
+31. [0.0%] Skydio | Redwood City, CA | Full-Time | Platform &#x2F; Backend &#x2F; Web &#x2F; Infrastructure &#x2F; DevOps Software Engineers | ONSITE ( — (unknown)
+   HN: Who is hiring | See post | Remote
+   https://news.ycombinator.com/item?id=22666010
+
+32. [0.0%] Carta (formerly eShares) | ONSITE (WFH for now) | Full-time | https:&#x2F;&#x2F;carta — (unknown)
+   HN: Who is hiring | See post | Remote
+   https://news.ycombinator.com/item?id=22666019
+
+33. [0.0%] MBition | Embedded&#x2F;Backend&#x2F;App Software Engineers, Architects, Product Owners, DevOps, various roles | Berlin &amp; Stuttgart, Ger — (unknown)
+   HN: Who is hiring | See post | Remote
+   https://news.ycombinator.com/item?id=22666053
+
+34. [0.0%] SINCH We do messaging — (unknown)
+   HN: Who is hiring | See post | Remote
+   https://news.ycombinator.com/item?id=22666158
+
+35. [0.0%] Perry Street Software | New York, NY | Product Manager; Mobile Developer | Remote (WFH) | Full-Time The publisher of SCRUFF (www — (unknown)
+   HN: Who is hiring | See post | Remote
+   https://news.ycombinator.com/item?id=22666178
+
+36. [0.0%] Narmi (Techstars NYC &#x27;17)| New York, NY (NYC) | ONSITE | https:&#x2F;&#x2F;www — (unknown)
+   HN: Who is hiring | See post | Remote
+   https://news.ycombinator.com/item?id=22666188
+
+37. [0.0%] Khan Academy | Mountain View, CA and REMOTE USA&#x2F;CANADA | Senior Backend &#x2F; Fullstack | https:&#x2F;&#x2F;khanacademy — (unknown)
+   HN: Who is hiring | See post | Remote
+   https://news.ycombinator.com/item?id=22666193
+
+38. [0.0%] LineLibrary | Senior Frontend Engineer, Software Engineer | Chicago, IL | Full Time | Onsite LineLibrary is an early-stage startup whose mis — (unknown)
+   HN: Who is hiring | See post | On-site
+   https://news.ycombinator.com/item?id=22666235
+
+39. [0.0%] Natera | Full-Stack &amp; Back End Software Engineers, QA, SDET, Project Managers | San Carlos, CA + Austin, TX | ONSITE (remote during isol — (unknown)
+   HN: Who is hiring | See post | Remote
+   https://news.ycombinator.com/item?id=22666273
+
+40. [0.0%] Copywriter — Coalition Technologies
+   Remotive | Worldwide | Remote
+   https://remotive.com/remote-jobs/writing/copywriter-1749306
+
+41. [0.0%] Freelance Writer — IAPWE
+   Remotive | Worldwide | Remote
+   https://remotive.com/remote-jobs/writing/freelance-writer-1185979
+
+42. [0.0%] Online Data Analyst (United States/Spanish speakers) — TELUS Digital
+   Remotive | USA | Remote
+   https://remotive.com/remote-jobs/all-others/online-data-analyst-united-states-spanish-speakers-2088704
+
+43. [0.0%] Senior Frontend Developer — Sanctuary Computer
+   Remotive | LATAM, Asia | Remote
+   https://remotive.com/remote-jobs/software-development/senior-frontend-developer-2088707
+
+44. [0.0%] Fullstack Developer (US - ET) — Chooose
+   Remotive | USA | Remote
+   https://remotive.com/remote-jobs/software-development/fullstack-developer-us-et-2088706
+
+45. [0.0%] iOS Developer — nooro
+   Remotive | USA | Remote
+   https://remotive.com/remote-jobs/software-development/ios-developer-1956455
+
+46. [0.0%] 🇩🇪 Senior/Staff Software Engineer PHP, TS, Rust, Kotlin (m/w/d) — easybill GmbH
+   Remotive | Germany | Remote
+   https://remotive.com/remote-jobs/software-development/senior-staff-software-engineer-php-ts-rust-kotlin-m-w-d-2088708
+
+47. [0.0%] Office Assistant — Coalition Technologies
+   Remotive | Worldwide | Remote
+   https://remotive.com/remote-jobs/marketing/office-assistant-1680495
+
+48. [0.0%] Tech Lead Full-Stack Rails Engineer — Mitre Media
+   Remotive | USA, Canada, USA timezones | Remote
+   https://remotive.com/remote-jobs/software-development/tech-lead-full-stack-rails-engineer-2069746
+
+49. [0.0%] Online Data Analyst United States — TELUS Digital
+   Remotive | USA | Remote
+   https://remotive.com/remote-jobs/all-others/online-data-analyst-united-states-2088710
+
+50. [0.0%] Senior Full-stack React Developer — Lemon.io
+   Remotive | Americas, Europe, Asia, Oceania | Remote
+   https://remotive.com/remote-jobs/software-development/senior-full-stack-react-developer-2088711
+
+51. [0.0%] Customer Retention Manager — AutoHDR
+   Remotive | USA | Remote
+   https://remotive.com/remote-jobs/customer-service/customer-retention-manager-2088656
+
+52. [0.0%] Customer Support Representative — AutoHDR
+   Remotive | USA | Remote
+   https://remotive.com/remote-jobs/customer-service/customer-support-representative-2088655
+
+53. [0.0%] Senior Independent AI Engineer / Architect — A.Team
+   Remotive | Americas, Europe, Israel | Remote
+   https://remotive.com/remote-jobs/software-development/senior-independent-ai-engineer-architect-1919266
+
+54. [0.0%] Senior Independent Software Developer — A.Team
+   Remotive | Americas, Europe, Israel | Remote
+   https://remotive.com/remote-jobs/software-development/senior-independent-software-developer-1919265
+
+55. [0.0%] Content Reviewer - US — TELUS Digital
+   Remotive | USA | Remote
+   https://remotive.com/remote-jobs/all-others/content-reviewer-us-2089990
+
+56. [0.0%] AI Engineer — Dry Ground AI
+   Remotive | Brazil, Colombia, Philippines | Remote
+   https://remotive.com/remote-jobs/artificial-intelligence/ai-engineer-2089958
+
+57. [0.0%] Senior CAD Backend Engineer Mechanical CAD Automation — Foundation EGI
+   RemoteOK | Worldwide | Remote
+   https://remoteOK.com/remote-jobs/remote-senior-cad-backend-engineer-mechanical-cad-automation-foundation-egi-1131271
+
+58. [0.0%] Solution Engineer I — Onit, Inc.
+   RemoteOK | Pune, Maharashtra | Remote
+   https://remoteOK.com/remote-jobs/remote-solution-engineer-i-onit-inc-1131270
+
+59. [0.0%] Senior App &amp; Frontend Developer AS233 — Smart Working Solutions
+   RemoteOK | Worldwide | Remote
+   https://remoteOK.com/remote-jobs/remote-senior-app-amp-frontend-developer-as233-smart-working-solutions-1131268
+
+60. [0.0%] Data Scientist — Junction
+   RemoteOK | Worldwide | Remote
+   https://remoteOK.com/remote-jobs/remote-data-scientist-junction-1131265
+
+61. [0.0%] Applied AI Engineer Europe — Amigo
+   RemoteOK | Amsterdam | Remote
+   https://remoteOK.com/remote-jobs/remote-applied-ai-engineer-europe-amigo-1131296
+
+62. [0.0%] Head of Engineering — Lemon.io
+   Remotive | USA timezones, European timezones | Remote
+   https://remotive.com/remote-jobs/software-development/head-of-engineering-2089995
+
+63. [0.0%] Mid/Senior AI Video Artist — EverAI
+   Remotive | Worldwide | Remote
+   https://remotive.com/remote-jobs/marketing/mid-senior-ai-video-artist-2089994
+
+64. [0.0%] Full Stack Product Engineer — Pivotal Health
+   RemoteOK | Los Angeles  | Remote
+   https://remoteOK.com/remote-jobs/remote-full-stack-product-engineer-pivotal-health-1131314
+
+65. [0.0%] Data Engineer — Pivotal Health
+   RemoteOK | Los Angeles  | Remote
+   https://remoteOK.com/remote-jobs/remote-data-engineer-pivotal-health-1131305
+
+66. [0.0%] Full Stack Developer — Envision Horizons LLC
+   RemoteOK | Remote | Remote
+   https://remoteOK.com/remote-jobs/remote-full-stack-developer-envision-horizons-llc-1131303
+
+67. [0.0%] Tax AI Expert — Weekday
+   RemoteOK | India | Remote
+   https://remoteOK.com/remote-jobs/remote-tax-ai-expert-weekday-1131326
+
+68. [0.0%] ML Engineer — Trunk Tools, Inc.
+   RemoteOK | Worldwide | Remote
+   https://remoteOK.com/remote-jobs/remote-ml-engineer-trunk-tools-inc-1131329
+
+69. [0.0%] Engineer Software — Calabrio
+   RemoteOK | Worldwide | Remote
+   https://remoteOK.com/remote-jobs/remote-engineer-software-calabrio-1131345
+
+70. [0.0%] Senior Full stack React Developer — Lemon.io
+   RemoteOK | Worldwide | Remote
+   https://remoteOK.com/remote-jobs/remote-senior-full-stack-react-developer-lemon-io-1131339
+
+71. [0.0%] Operations software assistant — Bulldog Digital Media
+   Remotive | Europe, European timezones | Remote
+   https://remotive.com/remote-jobs/operations/operations-software-assistant-2090000
+
+72. [0.0%] Data Governance Engineer — Chime Financial, Inc
+   RemoteOK | San Francisco | Remote
+   https://remoteOK.com/remote-jobs/remote-data-governance-engineer-chime-financial-inc-1131365
+
+73. [0.0%] Regional Human Resources Business Partner West — Rowan
+   RemoteOK | California | Remote
+   https://remoteOK.com/remote-jobs/remote-regional-human-resources-business-partner-west-rowan-1131352
+
+74. [0.0%] Senior Full Stack Engineer — Paperpile
+   RemoteOK | Worldwide | Remote
+   https://remoteOK.com/remote-jobs/remote-senior-full-stack-engineer-paperpile-1131381
+
+75. [0.0%] Senior Site Reliability Engineer AI Infrastructure — Andromeda Cluster
+   RemoteOK | San Francisco | Remote
+   https://remoteOK.com/remote-jobs/remote-senior-site-reliability-engineer-ai-infrastructure-andromeda-cluster-1131375
+
+76. [0.0%] Staff Product Designer, Platform — Boulevard
+   We Work Remotely | Worldwide | Remote
+   https://weworkremotely.com/remote-jobs/boulevard-staff-product-designer-platform
+
+77. [0.0%] Electrical Design Lead — Treehouse Job Board
+   We Work Remotely | Worldwide | Remote
+   https://weworkremotely.com/remote-jobs/treehouse-job-board-electrical-design-lead
+
+78. [0.0%] Sr. Cloud Solutions Architect | DevOps (Remote) — Trace3
+   We Work Remotely | Worldwide | Remote
+   https://weworkremotely.com/remote-jobs/trace3-sr-cloud-solutions-architect-devops-remote
+
+79. [0.0%] Application Product Manager - Accounts Payable — Celonis
+   We Work Remotely | Worldwide | Remote
+   https://weworkremotely.com/remote-jobs/celonis-application-product-manager-accounts-payable
+
+80. [0.0%] Chrome Extension Developer — iGaming Product (New Build) — Elevated Leads Limited
+   We Work Remotely | Worldwide | Remote
+   https://weworkremotely.com/remote-jobs/elevated-leads-limited-chrome-extension-developer-igaming-product-new-build
+
+81. [0.0%] Full Stack AI Engineer — Reveleer
+   We Work Remotely | Worldwide | Remote
+   https://weworkremotely.com/remote-jobs/reveleer-full-stack-ai-engineer
+
+82. [0.0%] AI Research Engineer — Tether
+   We Work Remotely | Worldwide | Remote
+   https://weworkremotely.com/remote-jobs/tether-ai-research-engineer
+
+83. [0.0%] DevOps Engineer — Bugcrowd
+   We Work Remotely | Worldwide | Remote
+   https://weworkremotely.com/remote-jobs/bugcrowd-devops-engineer
+
+84. [0.0%] Senior DevOps Engineer — Zayzoon
+   We Work Remotely | Worldwide | Remote
+   https://weworkremotely.com/remote-jobs/zayzoon-senior-devops-engineer
+
+85. [0.0%] Senior Devops Engineer — Woliba
+   We Work Remotely | Worldwide | Remote
+   https://weworkremotely.com/remote-jobs/woliba-senior-devops-engineer
+
+86. [0.0%] DevOps Engineer — Jahnel Group
+   We Work Remotely | Worldwide | Remote
+   https://weworkremotely.com/remote-jobs/jahnel-group-devops-engineer
+
+87. [0.0%] Full-stack/Backend developers LLM focused. — CloudDevs
+   We Work Remotely | Worldwide | Remote
+   https://weworkremotely.com/remote-jobs/clouddevs-full-stack-backend-developers-llm-focused
+
+88. [0.0%] Senior DevOps Engineer — Kasha
+   We Work Remotely | Worldwide | Remote
+   https://weworkremotely.com/remote-jobs/kasha-senior-devops-engineer
+
+89. [0.0%] OpenStack Cloud Engineer (DevOps) — Vexxhost
+   We Work Remotely | Worldwide | Remote
+   https://weworkremotely.com/remote-jobs/vexxhost-openstack-cloud-engineer-devops
+
+90. [0.0%] DevOps Lead — Interop Labs
+   We Work Remotely | Worldwide | Remote
+   https://weworkremotely.com/remote-jobs/interop-labs-devops-lead
+
+91. [0.0%] DevOps Engineer — Careers - Think Digitally
+   We Work Remotely | Worldwide | Remote
+   https://weworkremotely.com/remote-jobs/careers-think-digitally-devops-engineer
+
+92. [0.0%] DevOps Engineer — Cloud Counselage Pvt Ltd
+   We Work Remotely | Worldwide | Remote
+   https://weworkremotely.com/remote-jobs/cloud-counselage-pvt-ltd-devops-engineer
+
+Click-through searches (LinkedIn / Indeed / Glassdoor / Google):
+  - LinkedIn Jobs: https://www.linkedin.com/jobs/search/?keywords=python+java+c%2B%2B+html+css
+  - Indeed: https://www.indeed.com/jobs?q=python+java+c%2B%2B+html+css
+  - Glassdoor: https://www.glassdoor.com/Job/jobs.htm?sc.keyword=python+java+c%2B%2B+html+css
+  - Google Jobs: https://www.google.com/search?q=python+java+c%2B%2B+html+css+jobs&ibp=htl;jobs
