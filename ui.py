@@ -20,6 +20,7 @@ import pandas as pd
 import streamlit as st
 
 import app as agent
+import job_search
 
 # --------------------------------------------------------------------------- #
 # Page setup
@@ -506,8 +507,8 @@ with st.sidebar:
 # Main tabs
 # --------------------------------------------------------------------------- #
 
-tab_analyze, tab_tracker, tab_dashboard = st.tabs([
-    "🔍 Analyze", "📋 Tracker", "📊 Dashboard",
+tab_analyze, tab_findjobs, tab_tracker, tab_dashboard = st.tabs([
+    "🔍 Analyze", "🌐 Find Jobs", "📋 Tracker", "📊 Dashboard",
 ])
 
 
@@ -642,7 +643,213 @@ with tab_analyze:
         st.info("No analysis run yet. Upload files in the sidebar, then click **Run analysis now**.")
 
 
-# --- Tab 2: Tracker --------------------------------------------------------- #
+# --- Tab 2: Find Jobs (Phase 13 — multi-portal job discovery) -------------- #
+
+with tab_findjobs:
+    st.subheader("Find jobs across multiple portals")
+    st.caption(
+        "Searches several free job APIs + Pakistan-focused boards in parallel, "
+        "ranks results by overlap with your resume skills, and surfaces clickable "
+        "deep-link searches for LinkedIn / Indeed / Glassdoor / Google Jobs."
+    )
+
+    # ---- Resume-skills source ---- #
+    resume_text_combined, _, resume_files = agent.read_text_files(agent.RESUME_DIR)
+    auto_resume_skills = (
+        agent.extract_keywords(resume_text_combined) if resume_text_combined else []
+    )
+    if not auto_resume_skills:
+        st.info(
+            "Upload your resume in the sidebar (or run the **Analyze** tab once) so "
+            "the agent can pull skills from it. Without a resume the search still "
+            "works, but results won't be ranked by match."
+        )
+
+    with st.expander(
+        f"Skills detected from your resume ({len(auto_resume_skills)})",
+        expanded=False,
+    ):
+        if auto_resume_skills:
+            st.markdown(_render_chips(sorted(auto_resume_skills), "blue"),
+                        unsafe_allow_html=True)
+        else:
+            st.caption("(no resume loaded yet)")
+
+    # ---- Search controls ---- #
+    with st.form("job_search_form"):
+        c1, c2 = st.columns([3, 2])
+        default_q = job_search.build_query_from_resume(auto_resume_skills) if auto_resume_skills else ""
+        query = c1.text_input(
+            "Search query",
+            value=default_q,
+            placeholder="e.g. python machine learning",
+            help="Auto-built from your top resume skills. Edit to override.",
+        )
+        location = c2.text_input(
+            "Location (optional)", value="",
+            placeholder="e.g. Lahore, Karachi, Remote",
+        )
+
+        c3, c4, c5 = st.columns(3)
+        work_mode = c3.selectbox(
+            "Work mode", ["Any", "Remote", "Hybrid", "On-site"],
+        )
+        pakistan_only = c4.checkbox("🇵🇰 Pakistan only", value=False)
+        min_match = c5.slider(
+            "Minimum match %", 0, 100, 0, step=5,
+            help="Filter out postings with low resume overlap.",
+        )
+
+        provider_meta = job_search.list_providers()
+        st.markdown("**Sources**")
+        prov_cols = st.columns(2)
+        global_ids = [m["id"] for m in provider_meta if m["country"] == "global"]
+        pk_ids = [m["id"] for m in provider_meta if m["country"] == "pk"]
+        with prov_cols[0]:
+            st.caption("Global / remote")
+            global_selected = []
+            for m in provider_meta:
+                if m["country"] != "global":
+                    continue
+                if st.checkbox(f"{m['label']} ({m['tier']})", value=True, key=f"src_{m['id']}"):
+                    global_selected.append(m["id"])
+        with prov_cols[1]:
+            st.caption("Pakistan (best-effort HTML scrape)")
+            pk_selected = []
+            for m in provider_meta:
+                if m["country"] != "pk":
+                    continue
+                if st.checkbox(f"{m['label']}", value=True, key=f"src_{m['id']}"):
+                    pk_selected.append(m["id"])
+
+        per_source_limit = st.slider(
+            "Postings per source", 5, 50, 20, step=5,
+            help="Higher = more variety, slower search.",
+        )
+
+        search_clicked = st.form_submit_button("🔎 Search jobs", type="primary",
+                                               use_container_width=True)
+
+    if search_clicked:
+        chosen_sources = global_selected + pk_selected
+        if not chosen_sources:
+            st.error("Pick at least one source.")
+        elif not (query or "").strip():
+            st.error("Enter a search query (or load a resume so one can be auto-built).")
+        else:
+            with st.spinner(f"Searching {len(chosen_sources)} portals…"):
+                result = job_search.search_jobs(
+                    resume_skills=auto_resume_skills,
+                    query=query,
+                    location=location,
+                    work_mode=work_mode,
+                    sources=chosen_sources,
+                    pakistan_only=pakistan_only,
+                    min_match=min_match,
+                    per_source_limit=per_source_limit,
+                    keyword_extractor=agent.extract_keywords,
+                )
+            st.session_state["last_search"] = result
+            try:
+                report = job_search.render_report(result)
+                agent.save_text(
+                    os.path.join(agent.OUTPUT_DIR, "job_matches.txt"),
+                    report,
+                )
+            except Exception:
+                pass
+
+    last = st.session_state.get("last_search")
+    if last:
+        results = last.get("results") or []
+        used = last.get("providers_used") or []
+        errors = last.get("errors") or {}
+        deeplinks = last.get("deeplinks") or []
+
+        m1, m2, m3 = st.columns(3)
+        m1.metric("Jobs found", len(results))
+        m2.metric("Sources hit", len(used))
+        m3.metric("Sources errored", len(errors))
+
+        if errors:
+            with st.expander(f"⚠️ {len(errors)} provider(s) had errors", expanded=False):
+                for pid, msg in errors.items():
+                    st.caption(f"**{pid}** — {msg}")
+
+        # Deep-link panel — always shown so user can also click through to LinkedIn
+        st.markdown("##### Or click through to a live search")
+        link_cols = st.columns(len(deeplinks) or 1)
+        for i, d in enumerate(deeplinks):
+            link_cols[i].link_button(d["label"], d["url"], use_container_width=True)
+
+        st.divider()
+
+        if not results:
+            st.warning(
+                "No matching jobs found. Try a broader query, raise the per-source "
+                "limit, or lower the minimum-match filter. The Pakistan HTML "
+                "scrapers in particular sometimes return zero — that's expected "
+                "when the site changes its layout."
+            )
+        else:
+            df = pd.DataFrame([{
+                "Match %": r["match_score"],
+                "Title": r["title"],
+                "Company": r["company"] or "—",
+                "Location": r["location"] or "—",
+                "Mode": r["work_mode"],
+                "Source": r["source"],
+                "Posted": r["posted_at"] or "—",
+                "URL": r["url"],
+            } for r in results])
+            st.dataframe(
+                df,
+                hide_index=True,
+                use_container_width=True,
+                column_config={
+                    "Match %": st.column_config.ProgressColumn(
+                        "Match %", min_value=0, max_value=100,
+                    ),
+                    "URL": st.column_config.LinkColumn("URL", display_text="Open ↗"),
+                },
+            )
+
+            st.divider()
+            st.markdown("##### Save a posting to your tracker")
+            ids = [
+                f"{i+1}. {r['title']} — {r['company'] or '(unknown)'}"
+                for i, r in enumerate(results)
+            ]
+            with st.form("save_posting"):
+                pick = st.selectbox("Posting", ids)
+                pick_idx = ids.index(pick)
+                row = results[pick_idx]
+                save_clicked = st.form_submit_button("➕ Add to tracker")
+            if save_clicked:
+                new_id = agent.add_application(
+                    company=row.get("company") or "(unknown)",
+                    role=row.get("title") or "",
+                    source=row.get("source") or "",
+                    status="Not Applied",
+                    notes=(row.get("url") or "")[:300],
+                )
+                st.success(f"Saved as {new_id}. See the **Tracker** tab.")
+
+            st.markdown("##### Download report")
+            report_path = os.path.join(agent.OUTPUT_DIR, "job_matches.txt")
+            if os.path.exists(report_path):
+                with open(report_path, "r", encoding="utf-8") as f:
+                    st.download_button(
+                        "📄 Download job_matches.txt",
+                        data=f.read(),
+                        file_name="job_matches.txt",
+                        mime="text/plain",
+                    )
+    else:
+        st.info("Configure the search above and click **Search jobs**.")
+
+
+# --- Tab 3: Tracker --------------------------------------------------------- #
 
 with tab_tracker:
     st.subheader("Application tracker")
@@ -733,7 +940,7 @@ with tab_tracker:
             st.text(f.read())
 
 
-# --- Tab 3: Dashboard ------------------------------------------------------- #
+# --- Tab 4: Dashboard ------------------------------------------------------- #
 
 with tab_dashboard:
     st.subheader("Application funnel")
@@ -778,3 +985,31 @@ with tab_dashboard:
                 st.json(f.read())
         else:
             st.caption("Run an analysis to populate this.")
+
+
+# --------------------------------------------------------------------------- #
+# Footer — credit + social links (rendered on every tab)
+# --------------------------------------------------------------------------- #
+
+st.markdown(
+    """
+    <hr style="margin-top:3rem;margin-bottom:0.6rem;border:none;border-top:1px solid #e5e7eb;">
+    <div style="text-align:center;font-size:0.85rem;color:#6b7280;
+                padding-bottom:1rem;line-height:1.7;">
+      Made by <strong>ATEEB CHAUDARY</strong>
+      &nbsp;·&nbsp;
+      <a href="https://www.linkedin.com/in/ateeb-chaudary-a6a0a0263"
+         target="_blank" rel="noopener"
+         style="color:#0a66c2;text-decoration:none;font-weight:500;">LinkedIn</a>
+      &nbsp;·&nbsp;
+      <a href="https://github.com/Ateeb-333"
+         target="_blank" rel="noopener"
+         style="color:#24292f;text-decoration:none;font-weight:500;">GitHub</a>
+      &nbsp;·&nbsp;
+      <a href="https://ateeb-portfolio-sigma.vercel.app"
+         target="_blank" rel="noopener"
+         style="color:#000000;text-decoration:none;font-weight:500;">Portfolio</a>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
