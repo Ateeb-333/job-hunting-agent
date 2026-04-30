@@ -128,9 +128,72 @@ samples/         ->  ready-to-copy example files
 - **Sidebar uploads** for jobs, resumes, KB files (txt or pdf, multi-file)
 - **One-click analyze button** with progress spinner
 - **Inline preview** of every report (collapsible, with per-file download)
+- **🌐 Find Jobs tab** *(Phase 13)*: search 10+ portals, ranked by resume match
 - **Tracker tab**: form-based add/update, no CSV editing needed
 - **Dashboard tab**: status funnel chart, upcoming-dates table, JSON memory inspector
 - **Bonus downloads**: PDF report and `.ics` calendar straight from the browser
+
+---
+
+## Phase 13: multi-portal job discovery (`Find Jobs` tab)
+
+Pulls live job postings from multiple sources, ranks them by overlap with your
+resume skills, and links straight to the original posting. No LinkedIn/Indeed
+scraping (their ToS forbids it) — instead the tab also surfaces **deep-link
+search URLs** for LinkedIn, Indeed, Glassdoor, and Google Jobs that open
+pre-filled searches in your browser.
+
+### Sources shipped
+
+| Tier | Source | Coverage | Method |
+| --- | --- | --- | --- |
+| Global / remote | Remotive, RemoteOK, Arbeitnow, Jobicy, We Work Remotely, HN "Who is hiring" | Worldwide remote roles | Free public APIs / RSS, no key needed |
+| Pakistan | Rozee.pk, Mustakbil, BrightSpyre, Bayt.com (PK) | Pakistan-based jobs | HTML scrape, **best-effort** (will break occasionally when sites redesign) |
+| Click-through | LinkedIn, Indeed, Glassdoor, Google Jobs | Everything | Pre-filled search URL — you click, results open in your logged-in browser |
+
+### Filters
+
+- **Location** — free-text. Combine with *🇵🇰 Pakistan only* toggle.
+- **Work mode** — Remote / Hybrid / On-site / Any.
+- **Minimum match %** — hide postings whose snippet has weak overlap with your skills.
+- **Per-source limit** — cap how many postings each portal returns (5–50).
+- **Source picker** — turn off any provider you don't trust.
+
+### How match ranking works
+
+Each posting's title + snippet is scanned with the same `extract_keywords()`
+function the analysis engine uses, intersected with the skills detected from
+your resume, and scored as `overlap / detected_skills`. Top match goes first.
+
+### Robustness
+
+- Each provider runs in its own try/except — one source failing never blocks the rest.
+- 12-second HTTP timeout, 3 retries with backoff on 429/5xx responses.
+- 6-hour on-disk cache at `tracker/.search_cache.json` so repeated searches
+  during a session don't hammer portals (delete the file or call
+  `job_search.clear_cache()` to force-refresh).
+- All HTTP deps (`requests`, `beautifulsoup4`, `feedparser`) are *optional* —
+  install them via `requirements.txt`. If they're missing, the search tab
+  shows a clear install message but the rest of the agent still works.
+- Postings are de-duped by URL, sorted by match score, capped at 100 per search.
+
+### One-click "Save to tracker"
+
+Pick any posting from the results table → it's added to `applications.csv`
+with status *Not Applied* and the URL stored in *Notes*. Switch to the
+**Tracker** tab to set dates and update status.
+
+### Limitations (please read)
+
+- LinkedIn/Indeed scraping is intentionally **not implemented**. Use the
+  click-through buttons instead — they preserve your login state and don't
+  risk getting your IP banned.
+- Pakistan-focused HTML scrapers depend on the sites' current layouts. When a
+  layout changes the scraper returns zero results until updated. The other
+  sources (Remotive, RemoteOK, etc.) use stable JSON APIs and are more reliable.
+- Adzuna and Jooble require free API keys (signup required) — not wired in by
+  default. Add `ADZUNA_APP_ID`, `ADZUNA_APP_KEY`, `JOOBLE_API_KEY` to `.env`
+  later if you want them.
 
 ---
 
@@ -181,5 +244,13 @@ job-hunting-agent/
   - `pypdf` — read PDF inputs
   - `fpdf2` — export the final report as PDF
   - `streamlit` + `pandas` — the web UI
+  - `requests` + `beautifulsoup4` + `feedparser` — the **Find Jobs** tab
 
 Install everything: `pip install -r requirements.txt`
+
+---
+
+Made by **ATEEB CHAUDARY** —
+[LinkedIn](https://www.linkedin.com/in/ateeb-chaudary-a6a0a0263) ·
+[GitHub](https://github.com/Ateeb-333) ·
+[Portfolio](https://ateeb-portfolio-sigma.vercel.app)
