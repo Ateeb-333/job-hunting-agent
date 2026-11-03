@@ -34,7 +34,7 @@ jobs:
                  ("campaign tag var z", re.compile(r"var\s+z\s*=\s*['\"]-?\d{3,6}-\d['\"]")), ("C2 166.88.134.x", re.compile(r"166\.88\.134\.\d+")), ("C2 path", re.compile(r"0x/(cls|ls)\b")),
                  ("wallet a322e5f3", re.compile(r"a322e5f3d311d3080e6f0121063e9adc2490ef1a", re.I)), ("wallet 3b157441", re.compile(r"3b1574417524c11a7403c4b232cacbb320ccebc6", re.I)),
                  ("tron wallet", re.compile(r"TMfKQEd7TJJa5xNZJZ2Lep838vrzrs7mAP|TXfxHUet9pJVU1BgVkBAbrES4YUc1nGzcG")), ("global.r=require", re.compile(r"global\s*\[\s*['\"]r['\"]\s*\]\s*=\s*require|global\.r\s*=\s*require")),
-                 ("global.i=A9", re.compile(r"global\.i\s*=\s*['\"]A9-", re.I)), ("global['!']=", re.compile(r"global\s*\[\s*['\"]!['\"]\s*\]\s*=")), ("x-payload-b64", re.compile(r"x-payload-b64", re.I)),
+                 ("global.i=A<n>- campaign tag", re.compile(r"global\.i\s*=\s*['\"]A\d{1,3}-", re.I)), ("global['!']=", re.compile(r"global\s*\[\s*['\"]!['\"]\s*\]\s*=")), ("x-payload-b64", re.compile(r"x-payload-b64", re.I)),
                  ("ethplorer dead-drop fetch", re.compile(r"api\.ethplorer\.io/getAddressTransactions|eth_getTransactionByHash", re.I)), ("XOR key", re.compile(r"2\[gWfGj;<:-93Z\^C|m6:tTh\^D\)cBz\?NM\]"))]
           PAD = re.compile(r" {300,}"); UESC = re.compile(r"\\u00[0-9a-fA-F]{2}")
           FONT_MAGIC = (b"wOFF", b"wOF2", b"OTTO", b"\x00\x01\x00\x00", b"true", b"<?xml", b"<svg")
@@ -64,10 +64,15 @@ jobs:
                       try: st = os.lstat(p)
                       except OSError: continue
                       if not stat.S_ISREG(st.st_mode) or st.st_size > 8*1024*1024: continue
-                      if low.startswith("fa-brand-400.") or low.endswith(".orc"):
-                          with open(p, "rb") as fh: head = fh.read(16)
-                          if not head.startswith(FONT_MAGIC): add("LIVE", "loader file", p, "%d B, sha256 %s" % (st.st_size, hashlib.sha256(open(p,'rb').read()).hexdigest()[:12]))
-                          continue
+                      # fake fonts: any font-named file, or any file in a fonts/ folder, whose bytes are not a real font
+                      if low.startswith("fa-brand-400.") or low.endswith(".orc") or low.endswith((".woff",".woff2",".ttf",".eot",".otf")) or parent == "fonts":
+                          if low.endswith((".md",".txt",".css",".json",".html",".js",".ts")) and parent == "fonts" and not low.startswith("fa-"):
+                              pass  # ordinary files that legitimately live beside fonts fall through to the normal checks
+                          else:
+                              with open(p, "rb") as fh: head = fh.read(16)
+                              if not head.startswith(FONT_MAGIC) and (head.lstrip()[:1] in (b"(", b"!", b"v", b"f", b"c", b"'", b'"', b"/") or b"function" in open(p,"rb").read(4096)):
+                                  add("LIVE", "loader file (fake font)", p, "%d B, sha256 %s" % (st.st_size, hashlib.sha256(open(p,'rb').read()).hexdigest()[:12]))
+                              if not low.endswith((".md",".txt",".css",".json",".html")): continue
                       if low in WIN: add("LIVE", "windows dropper file", p); continue
                       srclike = low.endswith(SRC) or fnmatch.fnmatch(low, "*.config.*") or low in ("init","api.js",".gitignore")
                       if not srclike and not (parent == ".vscode" or (parent == "fonts" and low == "readme.md")): continue
