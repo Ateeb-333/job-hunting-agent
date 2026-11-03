@@ -1,0 +1,145 @@
+name: IOC Scan
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '23 3 * * *'
+jobs:
+  ioc-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Write the scanner
+        run: |
+          mkdir -p "$RUNNER_TEMP/ioc-shield"
+          cat > "$RUNNER_TEMP/ioc-shield/ioc_scan.py" <<'IOC_SHIELD_EOF'
+          #!/usr/bin/env python3
+          """ioc-shield: scan one folder for the A9-1800-1 / EtherHiding worm, every variant seen up to 3 Nov 2026.
+          Usage: ioc_scan.py <folder> [--neutralize] [--quiet]
+          Exit 0 clean, 1 findings, 2 error. --neutralize renames executable payload files to *.INFECTED so nothing can run them."""
+          import os, sys, re, stat, hashlib, fnmatch, json, time
+          PRUNE = {"node_modules",".git",".next","dist","build",".vite","venv",".venv","vendor","__pycache__",".turbo","coverage",".cache",".pytest_cache",".expo",".swc",".ioc-shield"}
+          SRC = (".js",".cjs",".mjs",".jsx",".ts",".tsx",".mts",".cts",".vue",".svelte",".astro",".mdx",".json",".yml",".yaml",".toml",".env",".sh",".bash",".zsh",".py",".bat",".cmd",".ps1",".php",".rb")
+          NON_CODE = (".svg",".html",".htm",".md",".json",".csv",".lock",".snap",".xml",".txt",".map")
+          MINIFIED = (".min.js",".min.cjs",".min.mjs",".bundle.js",".umd.js",".prod.js")
+          WAIVED = {"dist","build","coverage",".next","venv",".venv","site-packages","generated","public","static","assets","lib","libs","vendor"}
+          WIN = {"config.bat","temp_auto_push.bat","temp_interactive_push.bat","branch_structure.json"}
+          HIDE = re.compile(r"^\s*(config\.bat|branch_structure\.json|temp_auto_push\.bat|temp_interactive_push\.bat)\s*$", re.I|re.M)
+          LIT = [("marker A9-1800-1", re.compile(r"A9-1800-1", re.I)), ("marker 9-7772-4", re.compile(r"\b9-7772-4\b")), ("marker helloipbot", re.compile(r"helloipbot", re.I)), ("marker _$_1e42", re.compile(r"_\$_1e42")),
+                 ("campaign tag var z", re.compile(r"var\s+z\s*=\s*['\"]-?\d{3,6}-\d['\"]")), ("C2 166.88.134.x", re.compile(r"166\.88\.134\.\d+")), ("C2 path", re.compile(r"0x/(cls|ls)\b")),
+                 ("wallet a322e5f3", re.compile(r"a322e5f3d311d3080e6f0121063e9adc2490ef1a", re.I)), ("wallet 3b157441", re.compile(r"3b1574417524c11a7403c4b232cacbb320ccebc6", re.I)),
+                 ("tron wallet", re.compile(r"TMfKQEd7TJJa5xNZJZ2Lep838vrzrs7mAP|TXfxHUet9pJVU1BgVkBAbrES4YUc1nGzcG")), ("global.r=require", re.compile(r"global\s*\[\s*['\"]r['\"]\s*\]\s*=\s*require|global\.r\s*=\s*require")),
+                 ("global.i=A9", re.compile(r"global\.i\s*=\s*['\"]A9-", re.I)), ("global['!']=", re.compile(r"global\s*\[\s*['\"]!['\"]\s*\]\s*=")), ("x-payload-b64", re.compile(r"x-payload-b64", re.I)),
+                 ("ethplorer dead-drop fetch", re.compile(r"api\.ethplorer\.io/getAddressTransactions|eth_getTransactionByHash", re.I)), ("XOR key", re.compile(r"2\[gWfGj;<:-93Z\^C|m6:tTh\^D\)cBz\?NM\]"))]
+          PAD = re.compile(r" {300,}"); UESC = re.compile(r"\\u00[0-9a-fA-F]{2}")
+          FONT_MAGIC = (b"wOFF", b"wOF2", b"OTTO", b"\x00\x01\x00\x00", b"true", b"<?xml", b"<svg")
+          SELF_DOCS = {"iocs.txt","ioc_scan.py","scan-incoming.sh","safe-pull.sh","ioc-clean.sh","ioc-clean-repo.sh","strip-and-scan.sh","scan-malicious-code.sh","scan-supply-chain.sh","security.md","iocs.json"}
+          LIVE_KINDS = {"loader file","folder-open auto task","padded dropper tail","package.json runs dropper","python fetch-and-run stage","python stage import","windows dropper file"}
+
+          def density_ok(p):
+              parts = p.lower().split("/"); b = parts[-1]
+              if any(x in WAIVED for x in parts[:-1]) or b.endswith(MINIFIED) or b.endswith(NON_CODE): return False
+              return fnmatch.fnmatch(b, "*.config.*") or b in ("init","api.js") or b.endswith(SRC)
+          def is_bundle(text, lines):
+              big = [l for l in lines if len(l) > 3000]
+              if not big or any(PAD.search(l) for l in big): return False
+              j = "".join(big)
+              return len(re.findall(r"[(){}\[\];,=:]", j)) >= 0.05*len(j) and sum(map(len, big)) >= 0.95*max(len(text),1)
+
+          def scan(root):
+              F = []
+              def add(sev, kind, path, detail=""): F.append({"sev": sev, "kind": kind, "path": os.path.relpath(path, root), "detail": detail})
+              for dp, dn, fn in os.walk(root):
+                  dn[:] = [d for d in dn if d not in PRUNE]
+                  for name in fn:
+                      p = os.path.join(dp, name); low = name.lower(); parent = os.path.basename(dp).lower()
+                      try: st = os.lstat(p)
+                      except OSError: continue
+                      if not stat.S_ISREG(st.st_mode) or st.st_size > 8*1024*1024: continue
+                      if low.startswith("fa-brand-400.") or low.endswith(".orc"):
+                          with open(p, "rb") as fh: head = fh.read(16)
+                          if not head.startswith(FONT_MAGIC): add("LIVE", "loader file", p, "%d B, sha256 %s" % (st.st_size, hashlib.sha256(open(p,'rb').read()).hexdigest()[:12]))
+                          continue
+                      if low in WIN: add("LIVE", "windows dropper file", p); continue
+                      srclike = low.endswith(SRC) or fnmatch.fnmatch(low, "*.config.*") or low in ("init","api.js",".gitignore")
+                      if not srclike and not (parent == ".vscode" or (parent == "fonts" and low == "readme.md")): continue
+                      try: text = open(p, "rb").read().decode("utf-8", "replace")
+                      except OSError: continue
+                      if parent == ".vscode" and low == "tasks.json":
+                          if "folderOpen" in text:
+                              m = re.search(r'"command"\s*:\s*"([^"]{0,160})', text); add("LIVE", "folder-open auto task", p, m.group(1) if m else "runOn: folderOpen")
+                          continue
+                      if parent == ".vscode" and low == "settings.json":
+                          hits = [k for k in ("task.allowAutomaticTasks","terminal.integrated.hideOnStartup") if k in text]
+                          if hits: add("RESIDUE", "editor settings enabling hidden tasks", p, ", ".join(hits))
+                          continue
+                      if low == ".gitignore":
+                          if HIDE.search(text): add("RESIDUE", ".gitignore hide-lines", p, ", ".join(sorted({m.group(1) for m in HIDE.finditer(text)})))
+                          continue
+                      if low == "package.json":
+                          m = re.search(r"node\s+(\./)?(init|api\.js)\b", text)
+                          if m: add("LIVE", "package.json runs dropper", p, m.group(0))
+                          continue
+                      if low == "readme.md" and parent == "fonts":
+                          if "Blockchain Explorer" in text: add("RESIDUE", "planted fonts README", p)
+                          continue
+                      if low in SELF_DOCS: continue
+                      for label, rx in LIT:
+                          m = rx.search(text)
+                          if m: add("LIVE" if not low.endswith((".md",".txt")) else "RESIDUE", "literal: " + label, p, "line %d" % (text.count("\n", 0, m.start()) + 1))
+                      lines = text.split("\n")
+                      for i, l in enumerate(lines, 1):
+                          pm = PAD.search(l)
+                          if pm and len(l) - pm.end() > 1000: add("LIVE", "padded dropper tail", p, "line %d, %d chars after %d spaces" % (i, len(l)-pm.end(), len(pm.group(0)))); break
+                      if density_ok(p):
+                          longest = max(lines, key=len)
+                          if len(longest) > 3000 and not is_bundle(text, lines) and not re.match(r"^\s*(<\s*path\s+)?d\s*=", longest): add("REVIEW", "very long line", p, "%d chars" % len(longest))
+                          if any(len(UESC.findall(l)) >= 40 for l in lines): add("REVIEW", "dense unicode escapes", p)
+                      if low.endswith(".py"):
+                          if re.search(r"subprocess|os\.system|popen", text) and re.search(r"\bnode\b", text) and re.search(r"NamedTemporaryFile|fromhex|urlopen", text): add("LIVE", "python fetch-and-run stage", p)
+                          if re.search(r"^\s*import\s+utils\.session", text, re.M): add("LIVE", "python stage import", p)
+              return F
+
+          def neutralize(root, F):
+              done = []
+              for f in F:
+                  if f["sev"] == "LIVE" and f["kind"] in ("loader file","folder-open auto task","padded dropper tail","windows dropper file","python fetch-and-run stage"):
+                      p = os.path.join(root, f["path"]); q = p + ".INFECTED"
+                      try: os.rename(p, q); done.append(f["path"])
+                      except OSError: pass
+              return done
+
+          def main():
+              args = [a for a in sys.argv[1:] if not a.startswith("--")]; opts = set(a for a in sys.argv[1:] if a.startswith("--"))
+              root = os.path.abspath(args[0] if args else ".")
+              if not os.path.isdir(root): print("ioc-shield: not a directory:", root); return 2
+              try: F = scan(root)
+              except Exception as exc: print("ioc-shield: ERROR:", exc); return 2
+              live = [f for f in F if f["sev"] == "LIVE"]; res = [f for f in F if f["sev"] == "RESIDUE"]; rev = [f for f in F if f["sev"] == "REVIEW"]
+              if not F:
+                  if "--quiet" not in opts: print("ioc-shield: clean -", root)
+                  return 0
+              print("=" * 70); print("ioc-shield: %d LIVE, %d residue, %d review in %s" % (len(live), len(res), len(rev), root))
+              for f in sorted(F, key=lambda x: ({"LIVE":0,"RESIDUE":1,"REVIEW":2}[x["sev"]], x["path"])): print("  [%s] %s: %s %s" % (f["sev"], f["kind"], f["path"], f["detail"]))
+              if "--neutralize" in opts and live:
+                  for p in neutralize(root, F): print("  neutralized -> %s.INFECTED" % p)
+              rep = os.path.join(os.path.expanduser("~/.ioc-shield/reports"), time.strftime("%Y%m%d-%H%M%S") + "-" + os.path.basename(root).replace(" ", "_") + ".json")
+              try: os.makedirs(os.path.dirname(rep), exist_ok=True); json.dump({"root": root, "findings": F}, open(rep, "w"), indent=1); print("  report:", rep)
+              except OSError: pass
+              print("=" * 70)
+              return 1 if (live or res) else 0
+          if __name__ == "__main__": sys.exit(main())
+          IOC_SHIELD_EOF
+      - name: Scan for the EtherHiding worm (variants to 3 Nov 2026)
+        run: |
+          set +e
+          python3 -I "$RUNNER_TEMP/ioc-shield/ioc_scan.py" "$GITHUB_WORKSPACE"
+          rc=$?
+          if [ "$rc" = "0" ]; then echo "ioc-shield: clean"; exit 0; fi
+          if [ "$rc" = "1" ]; then echo "::error::ioc-shield found worm artefacts on this branch. Do not merge, do not pull."; exit 1; fi
+          echo "::error::ioc-shield did not complete (exit $rc). Not a clean result."; exit "$rc"
