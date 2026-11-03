@@ -5,7 +5,6 @@ then generates analysis reports, tailored resume suggestions, interview question
 and maintains an application tracker with reminders.
 """
 
-import utils.session
 import csv
 import json
 import os
